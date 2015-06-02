@@ -28,6 +28,7 @@ void writeColor(string cadena, int X, int Y, WORD color){
     cout << cadena; 					// Now print out what we wanted to at the position that was passed in
 }
 int main(int argc, char** argv) {
+    
     cout << "pingaaaaaaaaa" << endl << endl;
     Avatar alvaro("ASCT",4,5,100);
     cout << alvaro.getNombre() << endl;
@@ -40,6 +41,7 @@ int main(int argc, char** argv) {
     cout << juanjo.getPosX() << endl;
     cout << juanjo.getPosY() << endl;
     cout << juanjo.getMaxVida() << endl;
+    
 //    writeColor("Red",  0, 0, FOREGROUND_RED);		// Draw "Red" in the color RED.  Draw "White" in the color WHITE.  If we OR ("|") the colors together, it becomes white.
 //    writeColor("White",0, 1, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 //    writeColor("Blue", 1, 0, FOREGROUND_BLUE);	// Draw "Blue" in the color BLUE.

@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Artefacto.h</itemPath>
       <itemPath>Avatar.h</itemPath>
       <itemPath>Entidad.h</itemPath>
       <itemPath>Monstruo.h</itemPath>
@@ -15,6 +16,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Artefacto.cpp</itemPath>
       <itemPath>Avatar.cpp</itemPath>
       <itemPath>Entidad.cpp</itemPath>
       <itemPath>Monstruo.cpp</itemPath>
@@ -42,6 +44,10 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Artefacto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Artefacto.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Avatar.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Avatar.h" ex="false" tool="3" flavor2="0">
@@ -77,6 +83,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Artefacto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Artefacto.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Avatar.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Avatar.h" ex="false" tool="3" flavor2="0">
