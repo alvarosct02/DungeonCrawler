@@ -5,7 +5,10 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>Avatar.h</itemPath>
+      <itemPath>Celda.h</itemPath>
       <itemPath>Entidad.h</itemPath>
+      <itemPath>GestorLaberinto.h</itemPath>
+      <itemPath>Laberinto.h</itemPath>
       <itemPath>Monstruo.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -16,7 +19,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Avatar.cpp</itemPath>
+      <itemPath>Celda.cpp</itemPath>
       <itemPath>Entidad.cpp</itemPath>
+      <itemPath>GestorLaberinto.cpp</itemPath>
+      <itemPath>Laberinto.cpp</itemPath>
       <itemPath>Monstruo.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -46,9 +52,21 @@
       </item>
       <item path="Avatar.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Celda.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Celda.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Entidad.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Entidad.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GestorLaberinto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GestorLaberinto.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Laberinto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Laberinto.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Monstruo.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -81,9 +99,21 @@
       </item>
       <item path="Avatar.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Celda.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Celda.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Entidad.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Entidad.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GestorLaberinto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GestorLaberinto.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Laberinto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Laberinto.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Monstruo.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -36,7 +36,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Avatar.o \
+	${OBJECTDIR}/Celda.o \
 	${OBJECTDIR}/Entidad.o \
+	${OBJECTDIR}/GestorLaberinto.o \
+	${OBJECTDIR}/Laberinto.o \
 	${OBJECTDIR}/Monstruo.o \
 	${OBJECTDIR}/main.o
 
@@ -59,21 +62,36 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dungeoncrawler.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gametest.exe
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dungeoncrawler.exe: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gametest.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dungeoncrawler ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gametest ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/Avatar.o: Avatar.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Avatar.o Avatar.cpp
 
+${OBJECTDIR}/Celda.o: Celda.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Celda.o Celda.cpp
+
 ${OBJECTDIR}/Entidad.o: Entidad.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Entidad.o Entidad.cpp
+
+${OBJECTDIR}/GestorLaberinto.o: GestorLaberinto.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GestorLaberinto.o GestorLaberinto.cpp
+
+${OBJECTDIR}/Laberinto.o: Laberinto.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Laberinto.o Laberinto.cpp
 
 ${OBJECTDIR}/Monstruo.o: Monstruo.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -91,7 +109,7 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dungeoncrawler.exe
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gametest.exe
 
 # Subprojects
 .clean-subprojects:
