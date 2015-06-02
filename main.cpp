@@ -31,7 +31,7 @@ void writeColor(string cadena, int X, int Y, WORD color){
 }
 int main(int argc, char** argv) {
     
-    cout << "pingaaaaaaaaa" << endl << endl;
+    cout << "Holaaaa" << endl << endl;
     Avatar alvaro("ASCT",4,5,100);
     cout << alvaro.getNombre() << endl;
     cout << alvaro.getPosX() << endl;
