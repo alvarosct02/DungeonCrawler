@@ -7,12 +7,9 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <string>
 #include <windows.h>
-#include "Avatar.h"
-#include "Monstruo.h"
 #include <list>
-#include "GestorLaberinto.h"
+#include "Juego.h"
 using namespace std;
 
 /*
@@ -31,18 +28,11 @@ void writeColor(string cadena, int X, int Y, WORD color){
 }
 int main(int argc, char** argv) {
     
-    cout << "Holaaaa" << endl << endl;
-    Avatar alvaro("ASCT",4,5,100);
-    cout << alvaro.getNombre() << endl;
-    cout << alvaro.getPosX() << endl;
-    cout << alvaro.getPosY() << endl;
-    cout << alvaro.getMaxVida() << endl;
+    Juego game;
     
-    Monstruo juanjo;
-    cout << juanjo.getNombre() << endl;
-    cout << juanjo.getPosX() << endl;
-    cout << juanjo.getPosY() << endl;
-    cout << juanjo.getMaxVida() << endl;
+    
+//    cout << ":" << lab.getCelda(2,2) << endl;
+    
     
 //    writeColor("Red",  0, 0, FOREGROUND_RED);		// Draw "Red" in the color RED.  Draw "White" in the color WHITE.  If we OR ("|") the colors together, it becomes white.
 //    writeColor("White",0, 1, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
