@@ -32,7 +32,10 @@ void Laberinto::crearMatrix() {
         matrixCelda[j] = new Celda [w];
         for(int i = 0; i<w; i++){ 
 //            cout << matrixAux[j][i];
-            matrixCelda[j][i] = Celda(matrixAux[j][i]);
+            int val = matrixAux[j][i];
+            if (val == 3){ lastX = i; lastY = j;}           
+            else if (val == 4){ nextX = i; nextY = j;};
+            matrixCelda[j][i] = Celda(val);
         }
 //        cout << endl;
     }
@@ -44,6 +47,38 @@ int Laberinto::getCelda(int row, int col) {
 
 bool Laberinto::isNull() const {
     return nulo;
+}
+
+void Laberinto::setNextY(int nextY) {
+    this->nextY = nextY;
+}
+
+int Laberinto::getNextY() const {
+    return nextY;
+}
+
+void Laberinto::setNextX(int nextX) {
+    this->nextX = nextX;
+}
+
+int Laberinto::getNextX() const {
+    return nextX;
+}
+
+void Laberinto::setLastY(int lastY) {
+    this->lastY = lastY;
+}
+
+int Laberinto::getLastY() const {
+    return lastY;
+}
+
+void Laberinto::setLastX(int lastX) {
+    this->lastX = lastX;
+}
+
+int Laberinto::getLastX() const {
+    return lastX;
 }
 
 

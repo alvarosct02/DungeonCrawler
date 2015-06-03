@@ -10,7 +10,7 @@ Avatar::Avatar(void){
     posY = 0;
     maxVida = 100;
 }
-Avatar::Avatar(string name,int x,int y,int health){
+Avatar::Avatar(string name,int y,int x,int health){
     nombre = name;
     posX = x;
     posY = y;

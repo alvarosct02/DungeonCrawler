@@ -3,7 +3,7 @@
 #include "Entidad.h"
 #include <string>
 
-void Entidad::mover(int x, int y){
+void Entidad::mover(int y,int x){
     posX = x;
     posY = y;
 }

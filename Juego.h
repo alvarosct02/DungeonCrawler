@@ -11,6 +11,8 @@
 
 #include "Laberinto.h"
 #include "GestorLaberinto.h"
+#include "Avatar.h"
+#include "Dibujador.h"
 
 
 class Juego {
@@ -19,7 +21,8 @@ private:
     void* listaLaberintosAux[MAX];
     Laberinto *listaLaberintos;
     GestorLaberinto gestLab;
-    
+    Avatar avatar;
+    Dibujador dibujador;
 
 public:
     Juego();

@@ -15,6 +15,10 @@
 class Laberinto{
 private:
     int matrixAux[MAX][MAX];
+    int lastX;
+    int lastY;
+    int nextX;
+    int nextY;
     Celda **matrixCelda;
     bool nulo;
     int M;
@@ -31,6 +35,14 @@ public:
     void crearMatrix(void);
     int getCelda(int,int);
     bool isNull() const;
+    void setNextY(int nextY);
+    int getNextY() const;
+    void setNextX(int nextX);
+    int getNextX() const;
+    void setLastY(int lastY);
+    int getLastY() const;
+    void setLastX(int lastX);
+    int getLastX() const;
 };
 
 #endif	/* LABERINTO_H */

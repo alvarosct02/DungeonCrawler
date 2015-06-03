@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Artefacto.o \
 	${OBJECTDIR}/Avatar.o \
 	${OBJECTDIR}/Celda.o \
+	${OBJECTDIR}/Dibujador.o \
 	${OBJECTDIR}/Entidad.o \
 	${OBJECTDIR}/GestorLaberinto.o \
 	${OBJECTDIR}/Juego.o \
@@ -84,6 +85,11 @@ ${OBJECTDIR}/Celda.o: Celda.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Celda.o Celda.cpp
+
+${OBJECTDIR}/Dibujador.o: Dibujador.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Dibujador.o Dibujador.cpp
 
 ${OBJECTDIR}/Entidad.o: Entidad.cpp 
 	${MKDIR} -p ${OBJECTDIR}

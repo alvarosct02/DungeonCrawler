@@ -7,6 +7,7 @@
       <itemPath>Artefacto.h</itemPath>
       <itemPath>Avatar.h</itemPath>
       <itemPath>Celda.h</itemPath>
+      <itemPath>Dibujador.h</itemPath>
       <itemPath>Entidad.h</itemPath>
       <itemPath>GestorLaberinto.h</itemPath>
       <itemPath>Juego.h</itemPath>
@@ -23,6 +24,7 @@
       <itemPath>Artefacto.cpp</itemPath>
       <itemPath>Avatar.cpp</itemPath>
       <itemPath>Celda.cpp</itemPath>
+      <itemPath>Dibujador.cpp</itemPath>
       <itemPath>Entidad.cpp</itemPath>
       <itemPath>GestorLaberinto.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
@@ -63,6 +65,10 @@
       <item path="Celda.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Celda.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Dibujador.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Dibujador.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Entidad.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -118,6 +124,10 @@
       <item path="Celda.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Celda.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Dibujador.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Dibujador.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Entidad.cpp" ex="false" tool="1" flavor2="0">
       </item>
