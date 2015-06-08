@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Armadura.h</itemPath>
       <itemPath>Artefacto.h</itemPath>
       <itemPath>Avatar.h</itemPath>
       <itemPath>Celda.h</itemPath>
@@ -21,15 +22,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Artefacto.cpp</itemPath>
-      <itemPath>Avatar.cpp</itemPath>
-      <itemPath>Celda.cpp</itemPath>
-      <itemPath>Dibujador.cpp</itemPath>
-      <itemPath>Entidad.cpp</itemPath>
-      <itemPath>GestorLaberinto.cpp</itemPath>
-      <itemPath>Juego.cpp</itemPath>
-      <itemPath>Laberinto.cpp</itemPath>
-      <itemPath>Monstruo.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -54,39 +46,23 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="Artefacto.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Armadura.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Artefacto.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Avatar.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Avatar.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Celda.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Celda.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Dibujador.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Dibujador.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Entidad.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Entidad.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="GestorLaberinto.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="GestorLaberinto.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Laberinto.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Laberinto.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Monstruo.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Monstruo.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -113,39 +89,23 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Artefacto.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Armadura.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Artefacto.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Avatar.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Avatar.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Celda.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Celda.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Dibujador.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Dibujador.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Entidad.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Entidad.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="GestorLaberinto.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="GestorLaberinto.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Laberinto.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Laberinto.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Monstruo.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Monstruo.h" ex="false" tool="3" flavor2="0">
       </item>
