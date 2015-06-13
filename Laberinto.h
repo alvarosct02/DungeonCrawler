@@ -25,31 +25,36 @@ private:
     double pctMonstruo;
     int *nivelesMonstruo;
     double pctArtefacto;
-    int *nivelesArtefacto;    
+    int *nivelesArtefacto;  
+    
     Celda *inicio;
     Celda *final;
+    int nivel;
     void updateSize(int,int);
-    void agregarMonstruos(void);
     
-    
-public:
-    
-    Laberinto();
-    Laberinto(const Laberinto& orig);    
-    Laberinto& operator=(const Laberinto& orig);
+public:     
     virtual ~Laberinto(void); 
     
     Laberinto(char**,int,int);
-    bool isNull(void);
-    void agregarCelda(int,int,int);   
+    
     int getCelda(int,int);
+    bool estaVacia(int,int);    
+    void setMonstruo(int,int,Monstruo*);
+    void setArtefacto(int,int,Artefacto*);
+    
     void imprimir(void);
+    
     int getInicioY() const;
     int getInicioX() const;
-    int getFinalY() const;
-    int getFinalX() const;
+    
     int getN() const;
     int getM() const;
+    
+    void setNivel(int nivel);
+    int getNivel() const;
+    
+    double getPctArtefacto() const;
+    double getPctMonstruo() const;
     
 };
 
@@ -67,86 +72,32 @@ Laberinto::Laberinto(char **matriz,int m, int n){
             if (tipo == '+') final = matrixCelda[j][i];
         }
     }    
+    
     srand (time(NULL));
-    pctMonstruo = 0 + rand()%20;
-    pctArtefacto = 0 +rand()%20;
+    
+    pctMonstruo =   0 + rand()%20;
+    pctArtefacto =  0 + rand()%20;
+    
     nivelesMonstruo = new int[5];
+    for (int i=0; i<5; i++) nivelesMonstruo[i] = 2;
+    
     nivelesArtefacto = new int[5];
-    
-    agregarMonstruos();
-    
-}
+    for (int i=0; i<5; i++) nivelesArtefacto[i] = 2;
 
-
-void Laberinto::agregarMonstruos(void){
-    int count = 0;
-    for (int j= 0; j<M; j++){
-        for (int i= 0; i<N; i++){
-            if (getCelda(j,i) != '#' && rand()%100 < pctMonstruo){
-                count++;
-            }
-        }
-    }
-    cout << count << ' ';     
-}
-
-Laberinto::Laberinto(const Laberinto& orig) {
-    *this = orig;
-}
-
-Laberinto& Laberinto::operator=(const Laberinto& orig) {    
-    cout << "Laberinto Copiado\n";
-    M = orig.M;
-    N = orig.N;
-    pctMonstruo = orig.pctMonstruo;
-    pctArtefacto = orig.pctArtefacto;
-    
-    for (int i=0; i<NIVELES; i++){        
-        nivelesMonstruo[i] = orig.nivelesMonstruo[i];
-        nivelesArtefacto[i] = orig.nivelesArtefacto[i];
-    }
-    
-    int rowNum = ((orig.M-1)/SIZE + 1) * SIZE;    
-    int colNum = ((orig.N-1)/SIZE + 1) * SIZE;     
-    matrixCelda = new Celda**[rowNum];
-    for (int j= 0; j<rowNum; j++){
-        Celda** fila = new Celda*[colNum];
-        for (int i =0; i<colNum; i++){
-            Celda* cell = orig.matrixCelda[j][i];
-            if (cell != NULL) matrixCelda[j][i]  = new Celda(*cell);
-//            else nueva = 
-//            matrixCelda[j][i] = nueva;
-        }
-    }        
-    return *this;
 }
 
 Laberinto::~Laberinto() {
-    cout << "Destructor Laberinto" << endl;
-    cout << M << " " << N;
+    
     for (int j= 0; j<M; j++){
-        for (int i= 0; i<M; i++)
+        for (int i= 0; i<N; i++)
             delete matrixCelda[j][i];
         delete [] matrixCelda[j];
     }
     delete [] matrixCelda;
     delete [] nivelesMonstruo; 
     delete [] nivelesArtefacto; 
-    M = 0;
-    N = 0;
-    pctMonstruo = 0;
-    pctArtefacto = 0;
     
-//    int rowNum = (M/SIZE + 1) * SIZE;       
-//    for (int j= 0; j<rowNum; j++) delete[] matrixCelda[j];
-//    delete [] matrixCelda;    
-//    
-//    delete [] nivelesMonstruo;
-//    delete [] nivelesArtefacto;
-//    pctMonstruo = 0;
-//    pctArtefacto = 0;
-//    M = 0;
-//    N = 0;
+    cout << "Laberinto Destruido" << endl;
 }
 
 void Laberinto::imprimir(void){
@@ -159,20 +110,47 @@ void Laberinto::imprimir(void){
     }
 }
 
+int Laberinto::getCelda(int row, int col) {
+    if (row+1 <= M && col+1 <= N) return matrixCelda[row][col]->GetTipo();        
+    return 0;
+}
+
+bool Laberinto::estaVacia(int row, int col) {
+    if (row+1 <= M && col+1 <= N) return matrixCelda[row][col]->estaVacia();        
+    return false;
+}
+
+void Laberinto::setMonstruo(int row, int col, Monstruo* mons) {
+    matrixCelda[row][col]->SetMonstruo(mons);
+}
+
+void Laberinto::setArtefacto(int row, int col, Artefacto* artef) {
+    matrixCelda[row][col]->SetArtefacto(artef);
+}
+
+
+void Laberinto::setNivel(int nivel) {
+    this->nivel = nivel;
+}
+
+int Laberinto::getNivel() const {
+    return nivel;
+}
+
+double Laberinto::getPctArtefacto() const {
+    return pctArtefacto;
+}
+
+double Laberinto::getPctMonstruo() const {
+    return pctMonstruo;
+} 
+
 int Laberinto::getInicioY() const {
     return inicio->GetY();
 }
 
 int Laberinto::getInicioX() const {
     return inicio->GetX();
-}
-
-int Laberinto::getFinalY() const {
-    return final->GetY();
-}
-
-int Laberinto::getFinalX() const {
-    return final->GetX();
 }
 
 int Laberinto::getN() const {
@@ -183,13 +161,6 @@ int Laberinto::getM() const {
     return M;
 }
 
-Laberinto::Laberinto(void){  
-    cout << "Constructor Vacio" << endl;
-}
-int Laberinto::getCelda(int row, int col) {
-    if (row+1 <= M && col+1 <= N) return matrixCelda[row][col]->GetTipo();        
-    return 0;
-}
 
 #endif	/* LABERINTO_H */
 

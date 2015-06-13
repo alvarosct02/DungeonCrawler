@@ -13,21 +13,20 @@
 
 class Armadura : public Artefacto {
 public:
-    Armadura();
-    Armadura(const Armadura& orig);
+    Armadura(int);
     virtual ~Armadura();    
     void usar(Entidad entidad);
 private:
-
+    int defensa;
 };
 
-Armadura::Armadura() {
-}
-
-Armadura::Armadura(const Armadura& orig) {
+Armadura::Armadura(int def) {
+    defensa = def;
+    cout << "Armadura Creada";
 }
 
 Armadura::~Armadura() {
+    
 }
 
 void Armadura::usar(Entidad entidad) {

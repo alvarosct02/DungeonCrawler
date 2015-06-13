@@ -11,17 +11,23 @@
 #include "Laberinto.h"
 #include <fstream>
 #include <iostream>
-#define MAX 50
+#define MAX 200
 using namespace std;
 class GestorLaberinto{
 private:
     ifstream archivo;
+//    char **matrix;
+//    
     char *matrix[MAX];
 public:
     Laberinto* crear(void);
     GestorLaberinto(void);
+    virtual ~GestorLaberinto(void);
 };
 
+GestorLaberinto::~GestorLaberinto() {   
+    cout << "   Gestor Destruido\n";
+} 
 GestorLaberinto::GestorLaberinto() {    
     archivo.open("labFile.txt", ios::in);
     if (!archivo){
@@ -31,6 +37,7 @@ GestorLaberinto::GestorLaberinto() {
 }
 
 Laberinto *GestorLaberinto::crear(){    
+//    cout << "DONE\n";
     if (archivo.eof()) return NULL;
     
     string line;
@@ -46,14 +53,13 @@ Laberinto *GestorLaberinto::crear(){
             matrix[row][col] = tipo;
         }
         row++;
-    }   
+    }
        
     Laberinto *lab = new Laberinto(matrix,row,col);
-    
-//    cout << "DONE\n";
-//    cout << "celda: " << lab->getCelda(2,3) << endl;
-//    lab->crearMatrix();
-    
+//    for (int i=0 ; i<MAX ; i++){
+//        delete [] matrix[i];
+//    }
+//    delete [] matrix;
     return lab;
     
 }

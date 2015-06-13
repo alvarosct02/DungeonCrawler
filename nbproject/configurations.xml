@@ -14,6 +14,7 @@
       <itemPath>Juego.h</itemPath>
       <itemPath>Laberinto.h</itemPath>
       <itemPath>Monstruo.h</itemPath>
+      <itemPath>PocionCuracion.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -66,6 +67,8 @@
       </item>
       <item path="Monstruo.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="PocionCuracion.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -108,6 +111,8 @@
       <item path="Laberinto.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Monstruo.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PocionCuracion.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -18,11 +18,16 @@ class Artefacto {
 protected:
     string nombre;
     int tamMax;    
+    
 public:
     Artefacto();
-    void usar(Entidad entidad);
+    virtual ~Artefacto();
+    virtual void usar(Entidad entidad);
 };
 
+Artefacto::~Artefacto() {
+//    cout << "   Artefacto Eliminado\n";
+}
 
 Artefacto::Artefacto() {
     nombre = "sin_nombre";

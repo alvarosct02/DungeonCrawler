@@ -15,10 +15,14 @@ class Monstruo: public Entidad{
         int nivel;
         
     public:
-        Monstruo(void);        
-        Monstruo(string,int,int,int,int);
-        
+        Monstruo(void); 
+        virtual ~Monstruo(void);
+        Monstruo(string,int,int,int,int);        
 };
+
+Monstruo::~Monstruo(void){
+//    cout << "   Monstruo destruido\n";
+}
 
 Monstruo::Monstruo(void){
     nombre = "NoName";

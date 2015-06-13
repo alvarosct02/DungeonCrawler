@@ -31,9 +31,13 @@ public:
     int getPosY() const;
     void setPosX(int posX);
     int getPosX() const;
+    virtual ~Entidad(void);
 };
 
-
+Entidad::~Entidad(void){
+//    cout << "   Entidad Destruida\n";
+    
+}
 void Entidad::mover(int y,int x){
     posX = x;
     posY = y;
