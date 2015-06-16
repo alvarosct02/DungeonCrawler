@@ -9,17 +9,25 @@
 #define	ENTIDAD_H
 
 #include <string>
+
+#include "Saco.h"
 using namespace std;
 
 class Entidad{
-protected:
+private:
     int posX;
     int posY;
     int maxVida;
     int vidaActual;
     string nombre;
+    int idImg;
+    
+protected:
+    Saco *saco;
     
 public:
+    Entidad();
+    Entidad(string,int,int,int);
     void mover(int,int);
     void setNombre(string nombre);
     string getNombre() const;
@@ -32,7 +40,45 @@ public:
     void setPosX(int posX);
     int getPosX() const;
     virtual ~Entidad(void);
+    
+    void agregarObjeto(Artefacto*);
+    void listarObjetos(void);
+    void getObjeto(int);
+    void setIdImg(int idImg);
+    int getIdImg() const; 
 };
+
+void Entidad::agregarObjeto(Artefacto* obj){
+    saco->agregarObjeto(obj);
+}
+
+void Entidad::listarObjetos(void){
+    saco->listarObjetos();
+}
+
+void Entidad::getObjeto(int pos){
+    saco->getObjeto(pos);
+}
+
+void Entidad::setIdImg(int idImg) {
+    this->idImg = idImg;
+}
+
+int Entidad::getIdImg() const {
+    return idImg;
+}
+
+Entidad::Entidad(){
+    
+}
+
+Entidad::Entidad(string name,int y,int x,int health){
+    setNombre(name);
+    setPosX(x);
+    setPosY(y);
+    setMaxVida(health);    
+    saco = new Saco();
+}
 
 Entidad::~Entidad(void){
 //    cout << "   Entidad Destruida\n";

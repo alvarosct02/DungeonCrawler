@@ -21,7 +21,7 @@ private:
 
 PocionCuracion::PocionCuracion(int pV) {    
     puntosVida = pV;
-    cout << "PocionCuracion Creada";
+//    cout << "PocionCuracion Creada";
 }
 
 PocionCuracion::~PocionCuracion() {

@@ -13,11 +13,10 @@
 #include <iostream>
 #define MAX 200
 using namespace std;
+
 class GestorLaberinto{
 private:
     ifstream archivo;
-//    char **matrix;
-//    
     char *matrix[MAX];
 public:
     Laberinto* crear(void);
@@ -36,12 +35,10 @@ GestorLaberinto::GestorLaberinto() {
     }
 }
 
-Laberinto *GestorLaberinto::crear(){    
-//    cout << "DONE\n";
-    if (archivo.eof()) return NULL;
-    
+Laberinto *GestorLaberinto::crear(){  
+    if (archivo.eof()) return NULL;    
     string line;
-//    cout << "LAB" << endl;
+    
     int row = 0;
     int col = 0;
     while(!archivo.eof()){
@@ -53,15 +50,9 @@ Laberinto *GestorLaberinto::crear(){
             matrix[row][col] = tipo;
         }
         row++;
-    }
-       
+    }       
     Laberinto *lab = new Laberinto(matrix,row,col);
-//    for (int i=0 ; i<MAX ; i++){
-//        delete [] matrix[i];
-//    }
-//    delete [] matrix;
-    return lab;
-    
+    return lab;    
 }
 
 #endif	/* GESTORLABERINTO_H */

@@ -20,16 +20,12 @@ using namespace std;
 class Laberinto{
 private:
     Celda ***matrixCelda;
-    int M;
-    int N;
-    double pctMonstruo;
-    int *nivelesMonstruo;
-    double pctArtefacto;
-    int *nivelesArtefacto;  
-    
+    int M,N;
+    double pctMonstruo, pctArtefacto;
+    int *nivelesMonstruo, *nivelesArtefacto;    
     Celda *inicio;
-    Celda *final;
     int nivel;
+    
     void updateSize(int,int);
     
 public:     
@@ -38,6 +34,7 @@ public:
     Laberinto(char**,int,int);
     
     int getCelda(int,int);
+    Celda* getCeldaPtr(int,int);
     bool estaVacia(int,int);    
     void setMonstruo(int,int,Monstruo*);
     void setArtefacto(int,int,Artefacto*);
@@ -69,25 +66,15 @@ Laberinto::Laberinto(char **matriz,int m, int n){
             char tipo = matriz[j][i];
             matrixCelda[j][i] = new Celda(j,i,tipo);
             if (tipo == '-') inicio = matrixCelda[j][i];
-            if (tipo == '+') final = matrixCelda[j][i];
         }
     }    
     
-    srand (time(NULL));
-    
+    srand (time(NULL));    
     pctMonstruo =   0 + rand()%20;
-    pctArtefacto =  0 + rand()%20;
-    
-    nivelesMonstruo = new int[5];
-    for (int i=0; i<5; i++) nivelesMonstruo[i] = 2;
-    
-    nivelesArtefacto = new int[5];
-    for (int i=0; i<5; i++) nivelesArtefacto[i] = 2;
-
+    pctArtefacto =  0 + rand()%20;  
 }
 
 Laberinto::~Laberinto() {
-    
     for (int j= 0; j<M; j++){
         for (int i= 0; i<N; i++)
             delete matrixCelda[j][i];
@@ -110,6 +97,11 @@ void Laberinto::imprimir(void){
     }
 }
 
+Celda* Laberinto::getCeldaPtr(int row, int col) {
+    if (row+1 <= M && col+1 <= N) return matrixCelda[row][col];        
+    return NULL;
+}
+
 int Laberinto::getCelda(int row, int col) {
     if (row+1 <= M && col+1 <= N) return matrixCelda[row][col]->GetTipo();        
     return 0;
@@ -130,7 +122,13 @@ void Laberinto::setArtefacto(int row, int col, Artefacto* artef) {
 
 
 void Laberinto::setNivel(int nivel) {
-    this->nivel = nivel;
+    this->nivel = nivel+1;
+    nivelesMonstruo = new int[5];
+    nivelesArtefacto = new int[5];
+    for (int i=0, j= this->nivel - 2; i<5; i++,j++){
+        nivelesMonstruo[i] = max(1,j);
+        nivelesArtefacto[i] = max(1,j+1);
+    }
 }
 
 int Laberinto::getNivel() const {

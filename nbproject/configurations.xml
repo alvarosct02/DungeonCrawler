@@ -10,11 +10,13 @@
       <itemPath>Celda.h</itemPath>
       <itemPath>Dibujador.h</itemPath>
       <itemPath>Entidad.h</itemPath>
+      <itemPath>GestorImagenes.h</itemPath>
       <itemPath>GestorLaberinto.h</itemPath>
       <itemPath>Juego.h</itemPath>
       <itemPath>Laberinto.h</itemPath>
       <itemPath>Monstruo.h</itemPath>
       <itemPath>PocionCuracion.h</itemPath>
+      <itemPath>Saco.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -59,6 +61,8 @@
       </item>
       <item path="Entidad.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="GestorImagenes.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="GestorLaberinto.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
@@ -68,6 +72,8 @@
       <item path="Monstruo.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="PocionCuracion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Saco.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -104,6 +110,8 @@
       </item>
       <item path="Entidad.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="GestorImagenes.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="GestorLaberinto.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
@@ -113,6 +121,8 @@
       <item path="Monstruo.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="PocionCuracion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Saco.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

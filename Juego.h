@@ -15,13 +15,14 @@
 #include "Dibujador.h"
 #include "Armadura.h"
 #include "PocionCuracion.h"
+#include "GestorImagenes.h"
 #include <ctime>
 #include <cmath>
 #include <conio.h> 
 #define SIZE 5
 #define PI 3.14159
-#define A 8
-#define B 8
+#define A 15
+#define B 15
 
 class Juego {
 private:
@@ -29,6 +30,7 @@ private:
     Laberinto **listaLaberintos;
     Monstruo ***matrizMonstruos;    
     Artefacto ***matrizArtefactos;
+    GestorImagenes gestAvatar;
     int* cantMonstruos; 
     int* cantArtefactos; 
     
@@ -41,11 +43,14 @@ private:
     void cargarLaberintos(void);
     void desordenarLaberintos(void);
     void imprimirLaberintos(void);
-    void initJuego(void); 
-    bool dir_Mover(void);      
+    void initJuego(void);     
     void dir_Exit(void);
     
-    bool moverKeyboard(void);
+    bool cmd_MoverManual(void);  
+    bool cmd_MoverKeyboard(void);
+    bool cmd_SalirJuego(void);    
+    bool cmd_Interactuar(void);    
+    bool cmd_Usar(void);
     
     bool moverTo(int);
     
@@ -69,7 +74,6 @@ void Juego::imprimirLaberintos(void){
         cout << endl;
     }
 }
-
 
 void Juego::agrandarListaMonstruo(Monstruo** &lista,int cant){    
     Monstruo **aux = new Monstruo*[cant+SIZE];
@@ -100,7 +104,7 @@ void Juego::agregarMyA(Monstruo **&listaMonstruo,Artefacto **&listaArtefacto,int
             randArtef = rand()%100;
 //            si celda vacia, Agregar el monstruo
             if (lab->estaVacia(j,i) && randMonst < lab->getPctMonstruo()){                
-                Monstruo* monst = new Monstruo("Guanira",j,i,100,1);
+                Monstruo* monst = new Monstruo("Guanira",j,i,1);
                 lab->setMonstruo(j,i,monst);
                 if (cM != 0 && cM%SIZE == 0)
                     agrandarListaMonstruo(listaMonstruo,cM);
@@ -166,7 +170,6 @@ void Juego::cargarLaberintos(void){
         
 //        Llenar nueva lista de Monstruos
         int cM =0, cA = 0;
-        agregarMyA(listaMonstruo,listaArtefacto,cM,cA,lab);      
         
 //        Asignar al Arreglo en la posicion correcta
         listaLaberintos[cantLab] = lab;     
@@ -188,8 +191,12 @@ void Juego::desordenarLaberintos(void){
         listaLaberintos[randIndex] = listaLaberintos[i];
         listaLaberintos[i] = aux;
         listaLaberintos[i]->setNivel(i);
+        agregarMyA(matrizMonstruos[i],matrizArtefactos[i],cantMonstruos[i],cantArtefactos[i],listaLaberintos[i]);  
     }
     listaLaberintos[cantLab-1]->setNivel(cantLab-1);
+    agregarMyA(matrizMonstruos[cantLab-1],matrizArtefactos[cantLab-1],
+        cantMonstruos[cantLab-1],cantArtefactos[cantLab-1],listaLaberintos[cantLab-1]);  
+
 }
 
 void Juego::initJuego(void){
@@ -200,8 +207,10 @@ void Juego::initJuego(void){
     cantMonstruos = new int[SIZE];
     cantArtefactos = new int[SIZE];
     
+    
+    
     cargarLaberintos();
-//    desordenarLaberintos();
+    desordenarLaberintos();
     
 //    Asignar el primer Laberinto
     laberintoActual = listaLaberintos[0];
@@ -209,7 +218,10 @@ void Juego::initJuego(void){
 //    Posicionar el Avatar
     int lastX = laberintoActual->getInicioX();    
     int lastY = laberintoActual->getInicioY();
-    avatar = new Avatar("Alvaro",lastY,lastX,100);
+    
+    
+    int idAvatar = gestAvatar.escogerAvatar();
+    avatar = new Avatar("Alvaro",lastY,lastX,100,idAvatar);
     
     dibujador.setSize(A,B);    
     dibujador.dibujarLaberinto(avatar,laberintoActual);
@@ -247,101 +259,122 @@ Juego::~Juego() {
     delete avatar;
 }
     
-Juego::Juego() {
+Juego::Juego() {    
     initJuego();
-    string comando; 
+    string comando;
+    
     while(true){
         cin >> comando;
-        if (ejecutarComando(comando)) break;
+        if ( ejecutarComando(comando) )
+            break;
         dibujador.dibujarLaberinto(avatar,laberintoActual);        
-        
     }
-//    Armadura arm;
-//    arm.usar(avatar);
+//    
     
     cout << "\n\n";
 }
 
 bool Juego::ejecutarComando(string comando) {
     bool flag = false;
+    
     dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
+    
     if (comando == "mover"){        
-        cout << "Ingrese una direccion";
-        dibujador.dibujarXY(Dibujador::inputPos,comando.length()+2);        
-        flag = dir_Mover();
+        flag = cmd_MoverManual();
     } else if (comando == "run"){
-        flag = moverKeyboard();
+        flag = cmd_MoverKeyboard();
     } else if (comando == "exit"){
-        flag = true;
+        flag = cmd_SalirJuego();
+    } else if (comando == "interactuar"){
+        flag = cmd_Interactuar();
     } else {
+        
         cout << "Error: Comando Invalido";
     }
+    
 //    Limpiar espacio Comando
     dibujador.borrarLinea(Dibujador::inputPos,1,Dibujador::ancho1);
     return flag;
 }
 
-
-
-
-bool Juego::moverKeyboard(void) {
-//    bool flag = false;
-     
-//    dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
-    
-    
-    dibujador.borrarLinea(Dibujador::inputPos,1,Dibujador::ancho1); 
-    cout << "Running mode...";
-    int c;
-//    char c2;
-    bool flag = false;
-    while(1)
-    {
-        c = getch();
-        if (c != 224) break;
-        c = getch();
-        switch(c) {
-        case 72:
-            
-            flag = moverTo(3);            
-            break;
-        case 80:
-            flag = moverTo(1);
-            break;
-        case 77:
-            flag = moverTo(0);
-            break;
-        case 75:
-            flag = moverTo(2);
-            break;
-        default:
-            cout << c;
-            break;
-//            return false;
-//            break;
-        }
-        if (flag) break;
-        dibujador.borrarLinea(Dibujador::inputPos,1,Dibujador::ancho1);        
-        dibujador.dibujarLaberinto(avatar,laberintoActual);
-
-    }
-    
+bool Juego::cmd_Usar(void) {
+    return false;
 }
-
-bool Juego::moverTo(int dir){
+bool Juego::cmd_Interactuar(void) {
+    int dir;
+    dir = avatar->getDir();    
+    dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
+//    cout << "Avatar >> " << dir;
     
     float xDir = (cos(PI*dir/2.0));
     float yDir = (sin(PI*dir/2.0));
     int destX = avatar->getPosX() + int(xDir);
-    int destY = avatar->getPosY() + int(yDir);
+    int destY = avatar->getPosY() + int(yDir);    
     
-    
-    if (laberintoActual->getCelda(destY,destX) == '+'){
+//    Pasar al siguiente NIVEL
+    if (laberintoActual->getCelda(destY,destX) == 'A'){
+        cout << "Es un Artefacto";
+        Celda* celda = laberintoActual->getCeldaPtr(destY,destX);
+        avatar->agregarObjeto(celda->GetArtefacto());
+        avatar->listarObjetos();
+        celda->SetArtefacto(NULL);
+    }
+    else if (laberintoActual->getCelda(destY,destX) == 'M'){
+        cout << "Es un Monstruo";
+//        Celda* celda = laberintoActual->getCeldaPtr(destY,destX);
+//        avatar->agregarObjeto(celda->GetMonstruo());
+//        celda->SetArtefacto(NULL);
+    } 
+    else {
+        cout << "Aqui no hay nada";
         
+    }
+    dibujador.dibujarLaberinto(avatar,laberintoActual);
+    return false;
+}
+
+bool Juego::cmd_MoverKeyboard(void) {
+    
+    dibujador.borrarLinea(Dibujador::inputPos,1,Dibujador::ancho1); 
+    cout << "Running mode...";
+    int c;
+    bool flag = false;
+    while(true){
+        c = getch();
+        
+        if (c == 101){
+            cmd_Interactuar();      
+            continue;
+        }  
+        else if (c != 224) break;   
+        
+        c = getch();
+        dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1); 
+        switch(c) {
+            case 72: flag = moverTo(3); break;
+            case 80: flag = moverTo(1); break;
+            case 77: flag = moverTo(0); break;
+            case 75: flag = moverTo(2); break;
+            default: break;
+        }
+        if (flag) break;       
+        dibujador.dibujarLaberinto(avatar,laberintoActual);
+    }
+    return flag;
+}
+
+bool Juego::moverTo(int dir){    
+    avatar->setDir(dir);
+    float xDir = (cos(PI*dir/2.0));
+    float yDir = (sin(PI*dir/2.0));
+    int destX = avatar->getPosX() + int(xDir);
+    int destY = avatar->getPosY() + int(yDir);    
+    
+//    Pasar al siguiente NIVEL
+    if (laberintoActual->getCelda(destY,destX) == '+'){        
         int nextNivel = 1 + laberintoActual->getNivel();
-        if (cantLab == nextNivel) 
-            return true;
-        laberintoActual = listaLaberintos[nextNivel];
+        if (cantLab+1 == nextNivel) return true;
+        laberintoActual = listaLaberintos[nextNivel-1];
         int lastX = laberintoActual->getInicioX();    
         int lastY = laberintoActual->getInicioY();
         avatar->setPosX(lastX);
@@ -349,23 +382,48 @@ bool Juego::moverTo(int dir){
         dibujador.dibujarLaberinto(avatar,laberintoActual);
         
 //        avatar->mover(destY,destX);
+    } 
+//    Ir al NIVEL anterior
+    else if (laberintoActual->getCelda(destY,destX) == '-'){  
         dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
-    } else if (laberintoActual->getCelda(destY,destX) != '#'){
+        cout << "Vamos al nivel anterior";
+    }
+//    Mover a la celda indicada
+    else if (laberintoActual->getCelda(destY,destX) == ' '){
         avatar->mover(destY,destX);
+    } 
+//    Mostrar el error correspondiente
+    else if (laberintoActual->getCelda(destY,destX) == 'M'){
+        avatar->mover(destY,destX);
+//        dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
+//        cout << "Oops! Aqui hay un monstruo";
+    } 
+    else if (laberintoActual->getCelda(destY,destX) == 'A'){
         dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
-    } else{        
+        cout << "Woow, es un artefacto!";
+    } 
+    else{        
         dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
         cout << "Error: Es una pared";
-    }
+    }    
     return false;
 }
 
-bool Juego::dir_Mover(void){
+bool Juego::cmd_SalirJuego(void){    
+    return true;
+}
+bool Juego::cmd_MoverManual(void){    
+    dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
+    cout << "Ingrese una direccion";
+    dibujador.dibujarXY(Dibujador::inputPos,5+2);
+    
     string aux;
+    int dir;
+    
     cin >> aux;
     dibujador.borrarLinea(Dibujador::inputPos+1,1,Dibujador::ancho1);
-    int dir;
-    if (aux == "d") dir = 0;
+        
+    if (aux == "d")      dir = 0;
     else if (aux == "w") dir = 3;
     else if (aux == "a") dir = 2;
     else if (aux == "s") dir = 1;
@@ -373,10 +431,8 @@ bool Juego::dir_Mover(void){
         cout << "Error: Direccion invalida";
         return false;
     }
-    bool flag = moverTo(dir); 
-    return flag;
+    return moverTo(dir);
 }
-
 
 #endif	/* JUEGO_H */
 

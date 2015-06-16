@@ -10,10 +10,9 @@
 
 #include <string>
 
-#include "Entidad.h"
-
 using namespace std;
 
+class Entidad;
 class Artefacto {
 protected:
     string nombre;
@@ -22,7 +21,7 @@ protected:
 public:
     Artefacto();
     virtual ~Artefacto();
-    virtual void usar(Entidad entidad);
+    virtual void usar(Entidad* entidad);
 };
 
 Artefacto::~Artefacto() {
@@ -34,7 +33,7 @@ Artefacto::Artefacto() {
     tamMax = 0;
 }
 
-void Artefacto::usar(Entidad entidad){
+void Artefacto::usar(Entidad* entidad){
     //el monstruo o el avatar usan los objetos
     //este modulo no hace nada porque le harán override
 }

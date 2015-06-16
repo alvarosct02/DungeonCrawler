@@ -40,6 +40,16 @@ Dibujador::Dibujador() {
 //    ancho1 = 30;
     A = 0;
     B = 0;
+//    COLORREF cr;
+//    cr = RGB(255,192,203);
+//    PCONSOLE_SCREEN_BUFFER_INFO ci;
+//    CONSOLE_SCREEN_BUFFER_INFO cir;
+//    ci = &cir;
+//    cout <<hex<< ci->ColorTable[2];
+//    
+//    GetConsoleScreenBufferInfo();
+    
+    
 }
 
 void Dibujador::setSize(int b, int a) {
@@ -78,6 +88,9 @@ void Dibujador::dibujarCeldas(Avatar *hero, Laberinto *map) {
             else {
                 if (i<0 || j<0 || i >= map->getN() || j >= map->getM())
                     dibujarXY(j2,i2,'F',0);        
+                else if (map->getCelda(j,i) == '*'){                    
+                    dibujarXY(j2,i2,'F',0);                    
+                }
                 else {                    
                     dibujarXY(j2,i2,map->getCelda(j,i),12);                    
                 }

@@ -34,6 +34,8 @@ public:
     void SetArtefacto(Artefacto* artefacto);
     void SetMonstruo(Monstruo* monstruo);
     bool estaVacia(void);
+    Artefacto* GetArtefacto() const;
+    Monstruo* GetMonstruo() const;
 };
 //int Celda::cont = 0;
 
@@ -65,7 +67,7 @@ Celda::Celda(int y,int x,char t) {
 void Celda::SetTipo(char t) {
     switch (t){
         case '#': tipo = 0; break;
-        case '*': tipo = 0; break;
+        case '*': tipo = 6; break;
         case ' ': tipo = 1; break;
         case '-': tipo = 2; break;
         case '+': tipo = 3; break;   
@@ -82,7 +84,8 @@ int Celda::GetTipo() const {
         case 2: value = '-'; break;
         case 3: value = '+'; break; 
         case 4: value = 'M'; break;
-        case 5: value = 'A'; break;      
+        case 5: value = 'A'; break;
+        case 6: value = '*'; break;      
     }
     return value;
 }
@@ -98,16 +101,25 @@ int Celda::GetX() const {
 void Celda::SetArtefacto(Artefacto* artefacto) {
     this->artefacto = artefacto;
     SetTipo('A');
+    if (artefacto == NULL) SetTipo(' ');
 }
 
 void Celda::SetMonstruo(Monstruo* monstruo) {
     this->monstruo = monstruo;
     SetTipo('M');
-    
+    if (monstruo == NULL) SetTipo(' ');    
 }
 
 bool Celda::estaVacia(){
-    return ( GetTipo() != '#' && artefacto == NULL  && monstruo == NULL);
+    return ( GetTipo() == ' ' && artefacto == NULL  && monstruo == NULL);
+}
+
+Artefacto* Celda::GetArtefacto() const {
+    return artefacto;
+}
+
+Monstruo* Celda::GetMonstruo() const {
+    return monstruo;
 }
 
 

@@ -11,32 +11,29 @@
 #include "Entidad.h"
 
 class Monstruo: public Entidad{
-    private:
-        int nivel;
-        
-    public:
-        Monstruo(void); 
-        virtual ~Monstruo(void);
-        Monstruo(string,int,int,int,int);        
+private:
+    int nivel;
+public:
+    Monstruo(void); 
+    virtual ~Monstruo(void);
+    Monstruo(string,int,int,int);        
 };
 
 Monstruo::~Monstruo(void){
 //    cout << "   Monstruo destruido\n";
 }
 
-Monstruo::Monstruo(void){
-    nombre = "NoName";
-    posX = 0;
-    posY = 0;
-    maxVida = 100;
+Monstruo::Monstruo(void)
+    :Entidad("NoName",0,0,100){
     nivel = 1;
 }
-Monstruo::Monstruo(string name ,int x,int y,int health,int lvl){
-    nombre = name;
-    posX = x;
-    posY = y;
-    maxVida = health;
-    nivel = lvl;
+Monstruo::Monstruo(string name ,int y,int x,int lvl)
+    :Entidad(name,y,x,100+(lvl-1)*20){
+    int imgID = 0;
+//    imgID = rand()% 
+    
+    Entidad::setIdImg(imgID);
+    nivel = lvl;    
 }
 #endif	/* MONSTRUO_H */
 
