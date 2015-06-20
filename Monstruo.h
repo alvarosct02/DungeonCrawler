@@ -29,8 +29,7 @@ Monstruo::Monstruo(void)
 }
 Monstruo::Monstruo(string name ,int y,int x,int lvl)
     :Entidad(name,y,x,100+(lvl-1)*20){
-    int imgID = 0;
-//    imgID = rand()% 
+    int imgID = rand()%7;
     
     Entidad::setIdImg(imgID);
     nivel = lvl;    

@@ -16,12 +16,16 @@ class Entidad;
 class Artefacto {
 protected:
     string nombre;
-    int tamMax;    
+    string descripcion;
+    int tamMax;   
+    int idImg;
     
 public:
     Artefacto();
     virtual ~Artefacto();
-    virtual void usar(Entidad* entidad);
+    virtual void usar(Entidad* entidad)=0;
+    void setIdImg(int idImg);
+    int getIdImg() const;
 };
 
 Artefacto::~Artefacto() {
@@ -36,6 +40,14 @@ Artefacto::Artefacto() {
 void Artefacto::usar(Entidad* entidad){
     //el monstruo o el avatar usan los objetos
     //este modulo no hace nada porque le harán override
+}
+
+void Artefacto::setIdImg(int idImg) {
+    this->idImg = idImg;
+}
+
+int Artefacto::getIdImg() const {
+    return idImg;
 }
 
 #endif	/* ARTEFACTO_H */

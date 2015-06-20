@@ -33,7 +33,8 @@ public:
     
     Laberinto(char**,int,int);
     
-    int getCelda(int,int);
+    char getCelda(int,int);
+    int getCeldaID(int,int);
     Celda* getCeldaPtr(int,int);
     bool estaVacia(int,int);    
     void setMonstruo(int,int,Monstruo*);
@@ -52,6 +53,8 @@ public:
     
     double getPctArtefacto() const;
     double getPctMonstruo() const;
+    
+    
     
 };
 
@@ -102,8 +105,14 @@ Celda* Laberinto::getCeldaPtr(int row, int col) {
     return NULL;
 }
 
-int Laberinto::getCelda(int row, int col) {
+char Laberinto::getCelda(int row, int col) {
     if (row+1 <= M && col+1 <= N) return matrixCelda[row][col]->GetTipo();        
+    return 0;
+}
+
+int Laberinto::getCeldaID(int row, int col) {
+    if (row > -1 && col > -1 && row < M && col < N) 
+        return matrixCelda[row][col]->getId();        
     return 0;
 }
 

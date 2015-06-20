@@ -28,7 +28,7 @@ public:
     
     Celda(int,int,char);
     void SetTipo(char tipo);
-    int GetTipo() const;
+    char GetTipo() const;
     int GetY() const;
     int GetX() const;
     void SetArtefacto(Artefacto* artefacto);
@@ -36,8 +36,23 @@ public:
     bool estaVacia(void);
     Artefacto* GetArtefacto() const;
     Monstruo* GetMonstruo() const;
+    int getId() const;
 };
 //int Celda::cont = 0;
+
+int Celda::getId() const{
+    int value;
+    switch (tipo){
+        case '#': value = 0; break;
+        case ' ': value = 0; break;
+        case '-': value = 0; break;
+        case '+': value = 0; break; 
+        case 'M': value = monstruo->getIdImg(); break;
+        case 'A': value = artefacto->getIdImg(); break;
+        case '*': value = 0; break;      
+    }
+    return value;
+}
 
 Celda::Celda(){  
 //    cont ++;
@@ -76,7 +91,7 @@ void Celda::SetTipo(char t) {
     }
 }
 
-int Celda::GetTipo() const {
+char Celda::GetTipo() const {
     char value;
     switch (tipo){
         case 0: value = '#'; break;
