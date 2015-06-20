@@ -11,20 +11,26 @@
 #include "Laberinto.h"
 #include "Avatar.h"
 #include "Juego.h"
+#include "GestorImagenes.h"
+#include <conio.h>
+
 #define B_BLANCO 240
 #define WIN_W 80
 #define WIN_H 70
+
 class Juego;
 
 class Dibujador {
 private:
     Juego *myParent;
+    GestorImagenes *imageRep;
     int A;
     int B;
 public:
     static int ancho1;
     static int inputPos;
-    Dibujador(Juego*);
+    
+    Dibujador(Juego*,GestorImagenes*);
     void setSize(int,int);
     void dibujarLaberinto(Avatar*,Laberinto*);
     void dibujarCeldas(Avatar*,Laberinto*);
@@ -33,27 +39,60 @@ public:
     void dibujarFondo(void);
     void setWindowsSize(int, int);
     void borrarLinea(int, int, int);
-    
+
+    int escogerAvatar(void);    
+    void mostrarAvatar(int,int,int);  
 };
 
 int Dibujador::ancho1 = 30;
 int Dibujador::inputPos = 0;
 
-Dibujador::Dibujador(Juego *parent) {
+
+
+void Dibujador::mostrarAvatar(int id,int y, int x){    
+    for (int j = 0 ; j<16; j++)
+        for (int i=0; i< 16; i++)
+            dibujarYX(j+y,i+x,' ',0);
+    
+    for (int j = 0 ; j< imageRep->getEntidad_NumRow(); j++){
+        for (int i=0; i< imageRep->getEntidad_NumCol(); i++){
+            int val = 16* imageRep->getEntidad_Value(id,j,i);
+            dibujarYX(j+y,i+x,' ',val);
+            //            personajeArr[count][j][i] = val;
+        }
+    }
+}
+
+
+int Dibujador::escogerAvatar(void){
+    cout << "Bienvenido!\n";
+    cout << "Desplazate usando las flechas del teclado\n";
+    int c;
+    int id = 0;
+    bool flag = false;
+    mostrarAvatar(id,5,5);
+    while(true){
+        c = getch();
+        if (c != 224) break;   
+        
+        c = getch();
+        switch(c) {
+            case 77: id = (id+1)%(imageRep->getCountEntidad()); break;
+            case 75: id = (imageRep->getCountEntidad()+id-1)%imageRep->getCountEntidad(); break;
+            default: flag = true; break;
+        }
+        if (flag) break;
+        mostrarAvatar(id,5,5);
+    }
+    return id;
+}
+
+Dibujador::Dibujador(Juego *parent, GestorImagenes *gest) {
 //    cout << "Dibujador Vacio\n";
     myParent = parent;
-//    ancho1 = 30;
+    imageRep = gest;
     A = 0;
     B = 0;
-//    COLORREF cr;
-//    cr = RGB(255,192,203);
-//    PCONSOLE_SCREEN_BUFFER_INFO ci;
-//    CONSOLE_SCREEN_BUFFER_INFO cir;
-//    ci = &cir;
-//    cout <<hex<< ci->ColorTable[2];
-//    
-//    GetConsoleScreenBufferInfo();
-    
     
 }
 

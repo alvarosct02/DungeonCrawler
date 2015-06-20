@@ -30,14 +30,14 @@ private:
     Laberinto **listaLaberintos;
     Monstruo ***matrizMonstruos;    
     Artefacto ***matrizArtefactos;
-    GestorImagenes gestAvatar;
     int* cantMonstruos; 
     int* cantArtefactos; 
     
     int cantLab;
-    GestorLaberinto gestLab;
     Avatar* avatar;
     Dibujador *dibujador;
+    GestorImagenes *gestAvatar;
+    GestorLaberinto gestLab;
 //    bool win
     
     void cargarLaberintos(void);
@@ -53,8 +53,6 @@ private:
     bool cmd_Usar(void);
     
     bool moverTo(int);
-    
-    int escogerAvatar(void);
    
     bool ejecutarComando(string);
     
@@ -208,8 +206,6 @@ void Juego::initJuego(void){
     cantMonstruos = new int[SIZE];
     cantArtefactos = new int[SIZE];
     
-    
-    
     cargarLaberintos();
     desordenarLaberintos();
     
@@ -221,39 +217,11 @@ void Juego::initJuego(void){
     int lastY = laberintoActual->getInicioY();
     
     
-    int idAvatar = escogerAvatar(); //ESTO LO DEBE HACER DIBJADOR
+    int idAvatar = dibujador->escogerAvatar(); //ESTO LO DEBE HACER DIBJADOR
     avatar = new Avatar("Alvaro",lastY,lastX,100,idAvatar);
     
     dibujador->setSize(A,B);    
     dibujador->dibujarLaberinto(avatar,laberintoActual);
-}
-
-int Juego::escogerAvatar(void){
-    cout << "Bienvenido!\n";
-    cout << "Desplazate usando las flechas del teclado\n";
-    int c;
-    int id = 0;
-    bool flag = false;
-    dibujador->mostrarAvatar(id,5,5);
-    while(true){
-        c = getch();
-        if (c != 224) break;   
-        
-        c = getch();
-        int ce = dibujador->getCountEntidad();
-        switch(c) {
-            case 77: id = (id+1)%ce; break;
-            case 75: id = (ce+id-1)%ce; break;
-            default: flag = true; break;
-        }
-        if (flag) break;
-        mostrarAvatar(id,5,5);
-//        dibujador.dibujarLaberinto(avatar,laberintoActual);
-    }
-    return id;
-//    
-//    dibujarXY(20,0);
-//    cout << endl;
 }
 
 Juego::~Juego() {
@@ -290,7 +258,8 @@ Juego::~Juego() {
 }
     
 Juego::Juego() { 
-    dibujador = new Dibujador(this);
+    gestAvatar = new GestorImagenes();
+    dibujador = new Dibujador(this,gestAvatar);
     initJuego();
     string comando;
     

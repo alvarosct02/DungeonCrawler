@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=DungeonCrawler
+PROJECTNAME=GameTest
 
 # Active Configuration
 DEFAULTCONF=Debug
