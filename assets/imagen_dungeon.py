@@ -1,5 +1,5 @@
 import cv2
-nombre = "espadas"
+nombre = "pared4"
 
 img = cv2.imread(nombre + ".bmp",1)
 
@@ -14,8 +14,8 @@ espadas = []
 a0 = 2
 b0 = 1
 size = 10
-n = 5 #filas
-m = 3 #columnas
+n = 1 #filas
+m = 4 #columnas
 for a in range(a0,n*(size+1)+a0,size+1):
 	for b in range(b0,m*(size+1)+b0,size+1):
 		espada = []
