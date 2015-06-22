@@ -21,6 +21,27 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>GREEN.txt</itemPath>
+      <itemPath>LabFile.txt</itemPath>
+      <itemPath>RED.txt</itemPath>
+      <itemPath>Yellow.txt</itemPath>
+      <itemPath>armas.txt</itemPath>
+      <itemPath>assets/green.bmp</itemPath>
+      <itemPath>lista-personajes.txt</itemPath>
+      <itemPath>monstruos.txt</itemPath>
+      <itemPath>assets/pared1.bmp</itemPath>
+      <itemPath>pared1.txt</itemPath>
+      <itemPath>assets/pared2.bmp</itemPath>
+      <itemPath>pared2.txt</itemPath>
+      <itemPath>assets/pared3.bmp</itemPath>
+      <itemPath>pared3.txt</itemPath>
+      <itemPath>assets/pared4.bmp</itemPath>
+      <itemPath>pared4.txt</itemPath>
+      <itemPath>paredes.txt</itemPath>
+      <itemPath>personajes.txt</itemPath>
+      <itemPath>assets/red.bmp</itemPath>
+      <itemPath>assets/white.bmp</itemPath>
+      <itemPath>assets/yellow.bmp</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -61,11 +82,15 @@
       </item>
       <item path="Entidad.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="GREEN.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="GestorImagenes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="GestorLaberinto.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="LabFile.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Laberinto.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -73,9 +98,47 @@
       </item>
       <item path="PocionCuracion.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="RED.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Saco.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Yellow.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="armas.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/green.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/pared1.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/pared2.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/pared3.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/pared4.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/red.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/white.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/yellow.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lista-personajes.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="monstruos.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pared1.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pared2.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pared3.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pared4.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="paredes.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="personajes.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -110,11 +173,15 @@
       </item>
       <item path="Entidad.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="GREEN.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="GestorImagenes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="GestorLaberinto.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="LabFile.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Laberinto.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -122,9 +189,47 @@
       </item>
       <item path="PocionCuracion.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="RED.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Saco.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Yellow.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="armas.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/green.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/pared1.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/pared2.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/pared3.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/pared4.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/red.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/white.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="assets/yellow.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lista-personajes.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="monstruos.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pared1.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pared2.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pared3.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pared4.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="paredes.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="personajes.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
