@@ -1,0 +1,5 @@
+4
+pared1.txt
+pared2.txt
+pared3.txt
+pared4.txt

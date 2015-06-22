@@ -21,6 +21,7 @@ private:
     char tipo;
     Monstruo* monstruo;
     Artefacto* artefacto;
+    int random;
 public:
 //    static int cont;
     Celda(void);
@@ -37,6 +38,7 @@ public:
     Artefacto* GetArtefacto() const;
     Monstruo* GetMonstruo() const;
     int getId() const;
+    int GetRandom() const;
 };
 //int Celda::cont = 0;
 
@@ -53,6 +55,10 @@ int Celda::getId() const{
         case '*': value = 0; break;      
     }
     return value;
+}
+
+int Celda::GetRandom() const {
+    return random;
 }
 
 Celda::Celda(){  
@@ -82,7 +88,7 @@ Celda::Celda(int y,int x,char t) {
 
 void Celda::SetTipo(char t) {
     switch (t){
-        case '#': tipo = 0; break;
+        case '#': tipo = 0; /*random = rand()%4*/ random = 0; break;
         case '*': tipo = 6; break;
         case ' ': tipo = 1; break;
         case '-': tipo = 2; break;

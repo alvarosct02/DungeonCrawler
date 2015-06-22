@@ -52,6 +52,7 @@ public:
     void mostrarAvatarFull(int,int,int);  
     
     void mostrarAvatar(int,int,int,int,int);  
+    void mostrarPared(int,int,int,int);
     void mostrarArma(int,int,int);  
     void mostrarEspacio(int,int,int);  
     void mostrarMonstruo(int,int,int);  
@@ -126,6 +127,20 @@ void Dibujador::mostrarAvatar(int id,int anim, int dir, int y, int x){
                 dibujarYX(j+y,i+x,' ');
             } else {                
                 int val = 16* imageRep->getPersonaje_Value(id,anim,dir,j-1,i-1);
+                dibujarYX(j+y,i+x,' ',val);
+            }
+            //            personajeArr[count][j][i] = val;
+        }
+    }
+}
+
+void Dibujador::mostrarPared(int id,int random, int y,int x){
+    for (int j = 0 ; j< 10; j++){
+        for (int i=0; i< 10; i++){
+            if (j==0 || j== 9 || i == 0 || i == 9){                
+                dibujarYX(j+y,i+x,' ');
+            } else {                
+                int val = 16* imageRep->getPared_Value(id,random,j-1,i-1);
                 dibujarYX(j+y,i+x,' ',val);
             }
             //            personajeArr[count][j][i] = val;
@@ -225,10 +240,12 @@ void Dibujador::dibujarZoom(Avatar *hero, Laberinto *map){
     //            dibujarYX(initY+1+j,initX+1+i,tipo);
                 if (tipo == 'A')
                     mostrarArma(id,initY+(1+j)*10,initX+(1+i)*10);
-                else if (tipo == ' ' || tipo == '#')
-                    mostrarEspacio(id,initY+(1+j)*10,initX+(1+i)*10);
+                else if (tipo == '#')
+//                    mostrarPared(map->getNivel()-1,map->getCeldaRandom(posY+j,posX+i),initY+(1+j)*10,initX+(1+i)*10);
+                    mostrarPared(map->getNivel()-1,0,initY+(1+j)*10,initX+(1+i)*10);
                 else if (tipo == 'M')
                     mostrarMonstruo(id,initY+(1+j)*10,initX+(1+i)*10); 
+                else mostrarEspacio(id,initY+(1+j)*10,initX+(1+i)*10);
             }                  
         }
     }   

@@ -32,7 +32,7 @@ public:
     virtual ~Laberinto(void); 
     
     Laberinto(char**,int,int);
-    
+    int getCeldaRandom(int,int);
     char getCelda(int,int);
     int getCeldaID(int,int);
     Celda* getCeldaPtr(int,int);
@@ -107,6 +107,11 @@ Celda* Laberinto::getCeldaPtr(int row, int col) {
 
 char Laberinto::getCelda(int row, int col) {
     if (row+1 <= M && col+1 <= N) return matrixCelda[row][col]->GetTipo();        
+    return 0;
+}
+
+int Laberinto::getCeldaRandom(int row, int col){
+    if (row+1 <= M && col+1 <= N) return matrixCelda[row][col]->GetRandom();        
     return 0;
 }
 

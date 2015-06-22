@@ -8,6 +8,7 @@
 #ifndef GESTORAVATAR_H
 #define	GESTORAVATAR_H
 
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
 //
@@ -36,6 +37,11 @@ public:
 //    int getArma_NumRow(void);
     
     int getPersonaje_Value(int,int,int,int,int);
+    int getPared_Value(int,int,int,int);
+    
+    void imprimirArreglo(int**,int*);
+    void imprimirAsset(int***,int*,int);
+    void imprimirListaAssets(int****,int*,int);
 private:
     ifstream archivo;
     
@@ -43,16 +49,19 @@ private:
     int ***armaArr;
     int ***monstruoArr;
     int ****personajeArr;
+    int ****paredArr;
     
     int *sizeEntidadArr;
     int *sizeArmaArr;
     int *sizeMonstruoArr;
     int *sizePersonajeArr;
+    int *sizeParedArr;
     
     int countEntidad;
     int countArma;
     int countMonstruo;
     int countPersonaje;
+    int countPared;
 };
 
 GestorImagenes::GestorImagenes() {
@@ -65,6 +74,9 @@ GestorImagenes::GestorImagenes() {
     cargarAssets(name,countMonstruo,sizeMonstruoArr,monstruoArr);  
     name = "lista-personajes.txt";
     cargarAssetsMultiples(name,countPersonaje,sizePersonajeArr,personajeArr);
+    name = "paredes.txt";
+    cargarAssetsMultiples(name,countPared,sizeParedArr,paredArr);
+//    imprimirAsset(monstruoArr,sizeMonstruoArr,countMonstruo);
 }
 
 GestorImagenes::~GestorImagenes() {    
@@ -171,6 +183,10 @@ int GestorImagenes::getPersonaje_Value(int id, int anim, int dir, int row, int c
     return personajeArr[id][dir*2+anim][row][col];
 }
 
+int GestorImagenes::getPared_Value(int id,int random, int row, int col){
+    return paredArr[0][0][row][col];
+}
+
 int GestorImagenes::getEntidad_NumRow(void){
     return sizeEntidadArr[0];
 }
@@ -179,6 +195,21 @@ int GestorImagenes::getEntidad_NumCol(void){
     return sizeEntidadArr[1];
 }
 
+void GestorImagenes::imprimirArreglo(int**arr,int*size){
+    for (int i=0; i<size[0]; i++){
+        for (int j=0; j<size[1]; j++){
+            cout << arr[i][j] << "\t";
+        }
+        cout << endl;
+    }
+}
+void GestorImagenes::imprimirAsset(int***asset,int*size,int cant){
+    for (int i=0; i<cant; i++){
+        imprimirArreglo(asset[i],size);
+        cout << endl;
+    }
+    cout << endl;
+}
 
 
 #endif	/* GESTORAVATAR_H */
