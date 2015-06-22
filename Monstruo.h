@@ -16,7 +16,7 @@ private:
 public:
     Monstruo(void); 
     virtual ~Monstruo(void);
-    Monstruo(string,int,int,int);        
+    Monstruo(string,int,int,int,int);        
 };
 
 Monstruo::~Monstruo(void){
@@ -27,11 +27,11 @@ Monstruo::Monstruo(void)
     :Entidad("NoName",0,0,100){
     nivel = 1;
 }
-Monstruo::Monstruo(string name ,int y,int x,int lvl)
+Monstruo::Monstruo(string name ,int y,int x,int lvl,int id)
     :Entidad(name,y,x,100+(lvl-1)*20){
-    int imgID = rand()%7;
+//    int imgID = rand()%7;
     
-    Entidad::setIdImg(imgID);
+    Entidad::setIdImg(id);
     nivel = lvl;    
 }
 #endif	/* MONSTRUO_H */

@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include <fstream>
+//
+//#include "Arma.h"
 
 using namespace std;
 
@@ -19,21 +21,69 @@ public:
 //    GestorAvatar(const GestorAvatar& orig);
     virtual ~GestorImagenes();
     void cargarAssets(string,int&, int*&, int***&);
-    int getCountArma() const;
     int getCountEntidad() const;
     int getEntidad_Value(int,int,int);    
     int getEntidad_NumCol(void); 
-    int getEntidad_NumRow(void);
+    int getEntidad_NumRow(void);    
+    
+    int getCountArma() const;
+    int getArma_Value(int,int,int);    
+    
+    int getCountMonstruo() const;
+    int getMonstruo_Value(int,int,int); 
+//    int getArma_NumCol(void); 
+//    int getArma_NumRow(void);
 private:
     ifstream archivo;
+    
     int ***entidadArr;
-    int *sizeEntidadArr;
     int ***armaArr;
+    int ***monstruoArr;
+    
+    int *sizeEntidadArr;
     int *sizeArmaArr;
+    int *sizeMonstruoArr;
+    
     int countEntidad;
     int countArma;
+    int countMonstruo;
 };
 
+GestorImagenes::GestorImagenes() {
+    string name;
+    name = "personajes.txt";
+    cargarAssets(name,countEntidad,sizeEntidadArr,entidadArr);    
+    name = "armas.txt";
+    cargarAssets(name,countArma,sizeArmaArr,armaArr);     
+    name = "monstruos.txt";
+    cargarAssets(name,countMonstruo,sizeMonstruoArr,monstruoArr);  
+}
+
+GestorImagenes::~GestorImagenes() {    
+    for (int k = 0 ; k<countEntidad; k++){
+        for (int j = 0 ; j< sizeEntidadArr[0]; j++)
+            delete [] entidadArr[k][j];         
+        delete [] entidadArr[k];    
+    }
+    delete [] entidadArr;
+    delete [] sizeEntidadArr;
+    
+    for (int k = 0 ; k<countArma; k++){
+        for (int j = 0 ; j< sizeArmaArr[0]; j++)
+            delete [] armaArr[k][j];         
+        delete [] armaArr[k];    
+    }
+    delete [] armaArr;
+    delete [] sizeArmaArr;
+    
+    for (int k = 0 ; k<countMonstruo; k++){
+        for (int j = 0 ; j< sizeMonstruoArr[0]; j++)
+            delete [] monstruoArr[k][j];         
+        delete [] monstruoArr[k];    
+    }
+    delete [] monstruoArr;
+    delete [] sizeMonstruoArr;
+}
 
 void GestorImagenes::cargarAssets(string fileName,int &count, int*&sizeArr, int***& imgArr){
     ifstream archivo(fileName.c_str());
@@ -77,8 +127,20 @@ int GestorImagenes::getCountEntidad() const {
     return countEntidad;
 }
 
+int GestorImagenes::getCountMonstruo() const {
+    return countMonstruo;
+}
+
+int GestorImagenes::getMonstruo_Value(int id, int row, int col){
+    return monstruoArr[id][row][col];
+}
+
 int GestorImagenes::getEntidad_Value(int id, int row, int col){
     return entidadArr[id][row][col];
+}
+
+int GestorImagenes::getArma_Value(int id, int row, int col){
+    return armaArr[id][row][col];
 }
 
 int GestorImagenes::getEntidad_NumRow(void){
@@ -89,19 +151,6 @@ int GestorImagenes::getEntidad_NumCol(void){
     return sizeEntidadArr[1];
 }
 
-GestorImagenes::GestorImagenes() {
-    string name = "personajes.txt";
-    cargarAssets(name,countEntidad,sizeEntidadArr,entidadArr);    
-}
-
-GestorImagenes::~GestorImagenes() {    
-    for (int k = 0 ; k<countEntidad; k++){
-        for (int j = 0 ; j< sizeEntidadArr[0]; j++)
-            delete [] entidadArr[k][j];         
-        delete [] entidadArr[k];    
-    }
-    delete [] entidadArr;
-}
 
 
 #endif	/* GESTORAVATAR_H */

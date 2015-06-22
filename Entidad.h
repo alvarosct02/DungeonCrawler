@@ -78,6 +78,7 @@ Entidad::Entidad(string name,int y,int x,int health){
     setPosY(y);
     setMaxVida(health);    
     saco = new Saco();
+    setIdImg(0);
 }
 
 Entidad::~Entidad(void){

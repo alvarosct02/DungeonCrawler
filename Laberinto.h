@@ -73,8 +73,8 @@ Laberinto::Laberinto(char **matriz,int m, int n){
     }    
     
     srand (time(NULL));    
-    pctMonstruo =   0 + rand()%20;
-    pctArtefacto =  0 + rand()%20;  
+    pctMonstruo =   2 + rand()%4;
+    pctArtefacto =  5 + rand()%2;  
 }
 
 Laberinto::~Laberinto() {

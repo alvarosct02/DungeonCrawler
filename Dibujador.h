@@ -13,6 +13,8 @@
 #include "Juego.h"
 #include "GestorImagenes.h"
 #include <conio.h>
+#include <windows.h>
+
 
 #define B_BLANCO 240
 #define WIN_W 80
@@ -26,11 +28,16 @@ private:
     GestorImagenes *imageRep;
     int A;
     int B;
+    int widthLeft;
+    int inputPos;
 public:
-    static int ancho1;
-    static int inputPos;
     
     Dibujador(Juego*,GestorImagenes*);
+    
+    void writeCommand(string);
+    void writeCommandComment(string);
+    void writeCommandList(string);
+    
     void setSize(int,int);
     void dibujarLaberinto(Avatar*,Laberinto*);
     void dibujarCeldas(Avatar*,Laberinto*);
@@ -41,15 +48,64 @@ public:
     void borrarLinea(int, int, int);
 
     int escogerAvatar(void);    
+    
+    void mostrarAvatarFull(int,int,int);  
+    
     void mostrarAvatar(int,int,int);  
+    void mostrarArma(int,int,int);  
+    void mostrarEspacio(int,int,int);  
+    void mostrarMonstruo(int,int,int);  
 };
 
-int Dibujador::ancho1 = 30;
-int Dibujador::inputPos = 0;
+
+Dibujador::Dibujador(Juego *parent, GestorImagenes *gest) {
+    widthLeft = 30;
+    inputPos = 0;
+    myParent = parent;
+    imageRep = gest;
+    A = 0;
+    B = 0;
+}
+
+void Dibujador::dibujarYX(int Y, int X, char cadena = 0, WORD color = 7){	
+    HANDLE OutputH;	
+    COORD position = {X, Y};				
+    
+    OutputH = GetStdHandle(STD_OUTPUT_HANDLE);	
+    
+    SetConsoleTextAttribute(OutputH,color);		
+
+    SetConsoleCursorPosition(OutputH, position);	
+    if (cadena) cout << cadena; 		
+}
+
+void Dibujador::borrarLinea(int y, int x, int dist) {
+    dibujarYX(y,x,'/',0);
+    for (int i= 0; i<dist-1; i++)
+        cout << '/';
+    dibujarYX(y,x);
+//    dibujarCeldas(hero,map);
+}
+void Dibujador::writeCommand(string cad = ""){
+    borrarLinea(inputPos,1,widthLeft);
+    if (cad != "")
+        cout << cad;   
+}
+void Dibujador::writeCommandComment(string cad = ""){
+    borrarLinea(inputPos+1,1,widthLeft);
+    if (cad != "")
+        cout << cad;   
+}
+void Dibujador::writeCommandList(string){
+    
+}
 
 
 
-void Dibujador::mostrarAvatar(int id,int y, int x){    
+
+
+
+void Dibujador::mostrarAvatarFull(int id,int y, int x){    
     for (int j = 0 ; j<16; j++)
         for (int i=0; i< 16; i++)
             dibujarYX(j+y,i+x,' ',0);
@@ -63,6 +119,53 @@ void Dibujador::mostrarAvatar(int id,int y, int x){
     }
 }
 
+void Dibujador::mostrarAvatar(int id,int y, int x){  
+    for (int j = 0 ; j< 10; j++){
+        for (int i=0; i< 10; i++){
+            if (j==0 || j== 9 || i == 0 || i == 9){                
+                dibujarYX(j+y,i+x,' ');
+            } else {                
+                int val = 16* imageRep->getArma_Value(id,j-1,i-1);
+                dibujarYX(j+y,i+x,' ',val);
+            }
+            //            personajeArr[count][j][i] = val;
+        }
+    }
+}
+
+void Dibujador::mostrarEspacio(int id,int y, int x){  
+    for (int j = 0 ; j< 10; j++)
+        for (int i=0; i< 10; i++)       
+            dibujarYX(j+y,i+x,' ');
+}
+
+void Dibujador::mostrarArma(int id,int y, int x){  
+    for (int j = 0 ; j< 10; j++){
+        for (int i=0; i< 10; i++){
+            if (j==0 || j== 9 || i == 0 || i == 9){                
+                dibujarYX(j+y,i+x,' ');
+            } else {                
+                int val = 16* imageRep->getArma_Value(id,j-1,i-1);
+                dibujarYX(j+y,i+x,' ',val);
+            }
+            //            personajeArr[count][j][i] = val;
+        }
+    }
+}
+
+void Dibujador::mostrarMonstruo(int id,int y, int x){  
+    for (int j = 0 ; j< 10; j++){
+        for (int i=0; i< 10; i++){
+            if (j==0 || j== 9 || i == 0 || i == 9){                
+                dibujarYX(j+y,i+x,' ');
+            } else {                
+                int val = 16* imageRep->getMonstruo_Value(id,j-1,i-1);
+                dibujarYX(j+y,i+x,' ',val);
+            }
+            //            personajeArr[count][j][i] = val;
+        }
+    }
+}
 
 int Dibujador::escogerAvatar(void){
     cout << "Bienvenido!\n";
@@ -70,7 +173,7 @@ int Dibujador::escogerAvatar(void){
     int c;
     int id = 0;
     bool flag = false;
-    mostrarAvatar(id,5,5);
+    mostrarAvatarFull(id,5,5);
     while(true){
         c = getch();
         if (c != 224) break;   
@@ -82,44 +185,24 @@ int Dibujador::escogerAvatar(void){
             default: flag = true; break;
         }
         if (flag) break;
-        mostrarAvatar(id,5,5);
+        mostrarAvatarFull(id,5,5);
     }
     return id;
 }
-
-Dibujador::Dibujador(Juego *parent, GestorImagenes *gest) {
-//    cout << "Dibujador Vacio\n";
-    myParent = parent;
-    imageRep = gest;
-    A = 0;
-    B = 0;
-    
-}
-
 void Dibujador::setSize(int b, int a) {
     A = a;
     B = b;    
     inputPos = 7 + 2*(B+1);        
-    ancho1 = max(ancho1,2 + 2*(A+1));    
+    widthLeft = max(widthLeft,2 + 2*(A+1));    
     dibujarFondo();
     
 }
 
-void Dibujador::dibujarYX(int Y, int X, char cadena = 0,WORD color = 7){	
-    HANDLE OutputH;	
-    COORD position = {X, Y};				
-    
-    OutputH = GetStdHandle(STD_OUTPUT_HANDLE);	
-    
-    SetConsoleTextAttribute(OutputH,color);		
 
-    SetConsoleCursorPosition(OutputH, position);	
-    if (cadena) cout << cadena; 		
-}
 
 void Dibujador::dibujarZoom(Avatar *hero, Laberinto *map){
 //    dibujarYX(4,ancho1+3,' ',B_BLANCO); este es el offset inicial
-    int initX = ancho1+3;
+    int initX = widthLeft+3;
     int initY = 4;
     
     int posX = hero->getPosX();
@@ -128,17 +211,27 @@ void Dibujador::dibujarZoom(Avatar *hero, Laberinto *map){
     char tipo;
     int id;
     
-    for (int i=-1; i<=1; i++){
-        for (int j = -1; j<=1; j++){
+    for (int j=-1; j<=1; j++){
+        for (int i = -1; i<=1; i++){
             //asumiendo que el laberinto esta bien hecho
             //y el heroe nunca tiene adyacente una celda inexistente
             //(osea siempre hay al menos pared cerca)
-            tipo =  map->getCelda(posX+j,posY+i);
-            id = map->getCeldaID(posX+j,posY+i);
             
+            if (i==0 && j==0)
+                mostrarAvatar(hero->getIdImg(),initY+(1+j)*10,initX+(1+i)*10);
+            else {                
+                tipo =  map->getCelda(posY+j,posX+i);            
+                id = map->getCeldaID(posY+j,posX+i);     
+    //            dibujarYX(initY+1+j,initX+1+i,tipo);
+                if (tipo == 'A')
+                    mostrarArma(id,initY+(1+j)*10,initX+(1+i)*10);
+                else if (tipo == ' ' || tipo == '#')
+                    mostrarEspacio(id,initY+(1+j)*10,initX+(1+i)*10);
+                else if (tipo == 'M')
+                    mostrarMonstruo(id,initY+(1+j)*10,initX+(1+i)*10); 
+            }                  
         }
-    }
-   
+    }   
 }
 
 void Dibujador::dibujarCeldas(Avatar *hero, Laberinto *map) {
@@ -161,8 +254,7 @@ void Dibujador::dibujarCeldas(Avatar *hero, Laberinto *map) {
                 }
                 else {                    
                     dibujarYX(j2,i2,map->getCelda(j,i),12);                    
-                }
-                    
+                }                    
             }
         }        
     }
@@ -200,29 +292,22 @@ void Dibujador::dibujarFondo() {
     for (int i = 0; i<78; i++)
         cout << '_';
     for (int i = 3; i<inputPos+3; i++)
-        dibujarYX(i,ancho1+1,'|');
+        dibujarYX(i,widthLeft+1,'|');
     
-    dibujarYX(inputPos-3,ancho1+3);  cout << "Comandos:";
-    dibujarYX(inputPos-2,ancho1+3);  cout << " mover";
-    dibujarYX(inputPos-1,ancho1+3);  cout << " usar";
-    dibujarYX(inputPos,ancho1+3);    cout << " exit";
+    dibujarYX(inputPos-3,widthLeft+3);  cout << "Comandos:";
+    dibujarYX(inputPos-2,widthLeft+3);  cout << " mover";
+    dibujarYX(inputPos-1,widthLeft+3);  cout << " usar";
+    dibujarYX(inputPos,widthLeft+3);    cout << " exit";
     
-    dibujarYX(inputPos-3,ancho1+17); cout << "Direcciones:";
-    dibujarYX(inputPos-2,ancho1+17); cout << " derecha   (d)";
-    dibujarYX(inputPos-1,ancho1+17); cout << " arriba    (w)";
-    dibujarYX(inputPos,ancho1+17);   cout << " izquierda (a)";
-    dibujarYX(inputPos+1,ancho1+17); cout << " abajo     (s)";
+    dibujarYX(inputPos-3,widthLeft+17); cout << "Direcciones:";
+    dibujarYX(inputPos-2,widthLeft+17); cout << " derecha   (d)";
+    dibujarYX(inputPos-1,widthLeft+17); cout << " arriba    (w)";
+    dibujarYX(inputPos,widthLeft+17);   cout << " izquierda (a)";
+    dibujarYX(inputPos+1,widthLeft+17); cout << " abajo     (s)";
     
     
 }
 
-void Dibujador::borrarLinea(int y, int x, int dist) {
-    dibujarYX(y,x,'/',0);
-    for (int i= 0; i<dist-1; i++)
-        cout << '/';
-    dibujarYX(y,x);
-//    dibujarCeldas(hero,map);
-}
 
 
 

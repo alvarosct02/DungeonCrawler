@@ -14,17 +14,17 @@
 
 class PocionCuracion:public Artefacto {
 public:
-    PocionCuracion(int);
+    PocionCuracion(int,int);
     virtual ~PocionCuracion();
     void usar(Entidad* entidad);
 private:
     int puntosVida;
 };
 
-PocionCuracion::PocionCuracion(int pV) {    
+PocionCuracion::PocionCuracion(int pV,int id) {    
     puntosVida = pV;
 //    cout << "PocionCuracion Creada";
-    setIdImg(0);
+    setIdImg(id);
 }
 
 PocionCuracion::~PocionCuracion() {

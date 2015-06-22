@@ -18,7 +18,7 @@ class Celda{
 private:
     int x;
     int y;
-    int tipo;
+    char tipo;
     Monstruo* monstruo;
     Artefacto* artefacto;
 public:
@@ -42,7 +42,8 @@ public:
 
 int Celda::getId() const{
     int value;
-    switch (tipo){
+    int type = GetTipo();
+    switch (type){
         case '#': value = 0; break;
         case ' ': value = 0; break;
         case '-': value = 0; break;

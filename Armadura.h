@@ -13,23 +13,19 @@
 
 class Armadura : public Artefacto {
 public:
-    Armadura(int);
+    Armadura(int,int);
     virtual ~Armadura();    
     void usar(Entidad* entidad);
 private:
     int defensa;
 };
 
-Armadura::Armadura(int def){
+Armadura::Armadura(int def, int id){
     defensa = def;
-//    cout << "Armadura Creada";
-    setIdImg(0);
-    
- 
+    setIdImg(id);
 }
 
-Armadura::~Armadura() {
-    
+Armadura::~Armadura() {    
 }
 
 void Armadura::usar(Entidad*entidad) {
