@@ -34,6 +34,8 @@ public:
     int getMonstruo_Value(int,int,int); 
 //    int getArma_NumCol(void); 
 //    int getArma_NumRow(void);
+    
+    int getPersonaje_Value(int,int,int,int,int);
 private:
     ifstream archivo;
     
@@ -94,18 +96,17 @@ GestorImagenes::~GestorImagenes() {
 void GestorImagenes::cargarAssetsMultiples(string fileName, int&count, int*&sizeArr, int****&imgArr){
     ifstream archivo(fileName.c_str());
     if (!archivo){
-        cerr << "File could not be opened" << endl;
+        cerr << "File could not be opened asd" << endl;
         exit(1);
     }
     char file[500];
     archivo.getline(file,500);
-//    imgArr = new int***[atoi(file)];
-    cout << atoi(file) << endl;
-    while (archivo.getline(file,500)){
-        cout << "el archivo que voy a leer es: " << file << endl;
-//        cargarAssets(file,count,sizeArr,imgArr)
-    }
-     
+    int cant = atoi(file);
+    imgArr = new int***[cant];
+    for (int i=0; i<cant; i++){
+        archivo.getline(file,500);
+        cargarAssets(file,count,sizeArr,imgArr[i]);
+    }   
 }
 
 void GestorImagenes::cargarAssets(string fileName,int &count, int*&sizeArr, int***& imgArr){
@@ -164,6 +165,10 @@ int GestorImagenes::getEntidad_Value(int id, int row, int col){
 
 int GestorImagenes::getArma_Value(int id, int row, int col){
     return armaArr[id][row][col];
+}
+
+int GestorImagenes::getPersonaje_Value(int id, int anim, int dir, int row, int col){
+    return personajeArr[id][dir*2+anim][row][col];
 }
 
 int GestorImagenes::getEntidad_NumRow(void){
