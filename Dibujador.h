@@ -51,7 +51,7 @@ public:
     
     void mostrarAvatarFull(int,int,int);  
     
-    void mostrarAvatar(int,int,int);  
+    void mostrarAvatar(int,int,int,int);  
     void mostrarArma(int,int,int);  
     void mostrarEspacio(int,int,int);  
     void mostrarMonstruo(int,int,int);  
@@ -119,7 +119,7 @@ void Dibujador::mostrarAvatarFull(int id,int y, int x){
     }
 }
 
-void Dibujador::mostrarAvatar(int id,int y, int x){  
+void Dibujador::mostrarAvatar(int id,int anim, int y, int x){  
     for (int j = 0 ; j< 10; j++){
         for (int i=0; i< 10; i++){
             if (j==0 || j== 9 || i == 0 || i == 9){                
@@ -218,7 +218,7 @@ void Dibujador::dibujarZoom(Avatar *hero, Laberinto *map){
             //(osea siempre hay al menos pared cerca)
             
             if (i==0 && j==0)
-                mostrarAvatar(hero->getIdImg(),initY+(1+j)*10,initX+(1+i)*10);
+                mostrarAvatar(hero->getIdImg(),hero->getAnim(),initY+(1+j)*10,initX+(1+i)*10);
             else {                
                 tipo =  map->getCelda(posY+j,posX+i);            
                 id = map->getCeldaID(posY+j,posX+i);     

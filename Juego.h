@@ -374,8 +374,9 @@ bool Juego::moverTo(int dir){
         laberintoActual = listaLaberintos[nextNivel-1];
         int lastX = laberintoActual->getInicioX();    
         int lastY = laberintoActual->getInicioY();
-        avatar->setPosX(lastX);
-        avatar->setPosY(lastY);        
+//        avatar->setPosX(lastX);                                                    //JJ: ESTO NO DEBERIA HACERSE CON ENTIDAD::MOVER??
+//        avatar->setPosY(lastY);  
+        avatar->mover(lastY,lastX);
         dibujador->dibujarLaberinto(avatar,laberintoActual);
         
 //        avatar->mover(destY,destX);

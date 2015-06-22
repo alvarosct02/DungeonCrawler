@@ -21,6 +21,7 @@ public:
 //    GestorAvatar(const GestorAvatar& orig);
     virtual ~GestorImagenes();
     void cargarAssets(string,int&, int*&, int***&);
+    void cargarAssetsMultiples(string,int&, int*&, int****&);
     int getCountEntidad() const;
     int getEntidad_Value(int,int,int);    
     int getEntidad_NumCol(void); 
@@ -39,14 +40,17 @@ private:
     int ***entidadArr;
     int ***armaArr;
     int ***monstruoArr;
+    int ****personajeArr;
     
     int *sizeEntidadArr;
     int *sizeArmaArr;
     int *sizeMonstruoArr;
+    int *sizePersonajeArr;
     
     int countEntidad;
     int countArma;
     int countMonstruo;
+    int countPersonaje;
 };
 
 GestorImagenes::GestorImagenes() {
@@ -57,6 +61,8 @@ GestorImagenes::GestorImagenes() {
     cargarAssets(name,countArma,sizeArmaArr,armaArr);     
     name = "monstruos.txt";
     cargarAssets(name,countMonstruo,sizeMonstruoArr,monstruoArr);  
+    name = "lista-personajes.txt";
+    cargarAssetsMultiples(name,countPersonaje,sizePersonajeArr,personajeArr);
 }
 
 GestorImagenes::~GestorImagenes() {    
@@ -83,6 +89,23 @@ GestorImagenes::~GestorImagenes() {
     }
     delete [] monstruoArr;
     delete [] sizeMonstruoArr;
+}
+
+void GestorImagenes::cargarAssetsMultiples(string fileName, int&count, int*&sizeArr, int****&imgArr){
+    ifstream archivo(fileName.c_str());
+    if (!archivo){
+        cerr << "File could not be opened" << endl;
+        exit(1);
+    }
+    char file[500];
+    archivo.getline(file,500);
+//    imgArr = new int***[atoi(file)];
+    cout << atoi(file) << endl;
+    while (archivo.getline(file,500)){
+        cout << "el archivo que voy a leer es: " << file << endl;
+//        cargarAssets(file,count,sizeArr,imgArr)
+    }
+     
 }
 
 void GestorImagenes::cargarAssets(string fileName,int &count, int*&sizeArr, int***& imgArr){

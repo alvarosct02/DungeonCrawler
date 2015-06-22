@@ -12,43 +12,39 @@
 
 class Avatar: public Entidad{
 private:
-    int dir;
+    int dir; 
+    int anim; //0,1 
 public:
     Avatar(void);
     Avatar(string,int,int,int,int);
-    void moverDir(int);
     void setDir(int dir);
     int getDir() const;
-    
+    int getAnim() const;
 };
 
 Avatar::Avatar(void)
     :Entidad("Alvaro",0,0,100){
     dir = 0;
+    anim = 0;
 }
 Avatar::Avatar(string name,int y,int x,int health,int imgID)
     :Entidad(name,y,x,health){
     Entidad::setIdImg(imgID);
     dir = 0;  
-}
-
-void Avatar::moverDir(int dir){
-    int posY = getPosY();
-    int posX = getPosX();
-    switch(dir){
-        case 0: mover(posY,posX+1); break;
-        case 1: mover(posY-1,posX); break;
-        case 2: mover(posY-1,posX); break;
-        case 3: mover(posY+1,posX); break;
-    }
+    anim  = 0;
 }
 
 void Avatar::setDir(int dir) {
     this->dir = dir;
+    anim = !anim;
 }
 
 int Avatar::getDir() const {
     return dir;
+}
+
+int Avatar::getAnim() const{
+    return anim;
 }
 
 #endif	/* AVATAR_H */
