@@ -88,7 +88,7 @@ Celda::Celda(int y,int x,char t) {
 
 void Celda::SetTipo(char t) {
     switch (t){
-        case '#': tipo = 0; /*random = rand()%4*/ random = 0; break;
+        case '#': tipo = 0; random = rand()%4 ; break;
         case '*': tipo = 6; break;
         case ' ': tipo = 1; break;
         case '-': tipo = 2; break;

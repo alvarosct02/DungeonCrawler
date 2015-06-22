@@ -22,6 +22,7 @@ public:
     int getAnim() const;
 };
 
+
 Avatar::Avatar(void)
     :Entidad("Alvaro",0,0,100){
     dir = 0;

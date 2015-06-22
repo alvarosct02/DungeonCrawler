@@ -241,8 +241,8 @@ void Dibujador::dibujarZoom(Avatar *hero, Laberinto *map){
                 if (tipo == 'A')
                     mostrarArma(id,initY+(1+j)*10,initX+(1+i)*10);
                 else if (tipo == '#')
-//                    mostrarPared(map->getNivel()-1,map->getCeldaRandom(posY+j,posX+i),initY+(1+j)*10,initX+(1+i)*10);
-                    mostrarPared(map->getNivel()-1,0,initY+(1+j)*10,initX+(1+i)*10);
+                    mostrarPared(map->getNivel()-1,map->getCeldaRandom(posY+j,posX+i),initY+(1+j)*10,initX+(1+i)*10);
+//                    mostrarPared(map->getNivel()-1,0,initY+(1+j)*10,initX+(1+i)*10);
                 else if (tipo == 'M')
                     mostrarMonstruo(id,initY+(1+j)*10,initX+(1+i)*10); 
                 else mostrarEspacio(id,initY+(1+j)*10,initX+(1+i)*10);

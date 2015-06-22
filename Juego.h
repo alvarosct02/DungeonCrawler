@@ -242,8 +242,7 @@ Juego::~Juego() {
         cout << "Hay " << cantArtefactos[j] << " Artefactos" << endl;
         for (int i=0; i< cantArtefactos[j]; i++ )
             delete matrizArtefactos[j][i];        
-        delete [] matrizArtefactos[j];  
-        
+        delete [] matrizArtefactos[j];          
         
         delete listaLaberintos[j];
         cout << endl;

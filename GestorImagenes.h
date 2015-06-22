@@ -103,6 +103,28 @@ GestorImagenes::~GestorImagenes() {
     }
     delete [] monstruoArr;
     delete [] sizeMonstruoArr;
+    
+    for (int m = 0 ; m<4; m++){
+        for (int k = 0 ; k<countPersonaje; k++){
+            for (int j = 0 ; j< sizePersonajeArr[0]; j++)
+                delete [] personajeArr[m][k][j];         
+            delete [] personajeArr[m][k];    
+        }
+        delete [] personajeArr[m];
+    }
+    
+    for (int m = 0 ; m<4; m++){
+        for (int k = 0 ; k<countPared; k++){
+            for (int j = 0 ; j< sizeParedArr[0]; j++)
+                delete [] paredArr[m][k][j];         
+            delete [] paredArr[m][k];    
+        }
+        delete [] paredArr[m];
+    }
+    
+    delete [] sizePersonajeArr;
+    delete [] sizeParedArr;
+//    delete [] sizePersonajeArr;
 }
 
 void GestorImagenes::cargarAssetsMultiples(string fileName, int&count, int*&sizeArr, int****&imgArr){
@@ -184,7 +206,7 @@ int GestorImagenes::getPersonaje_Value(int id, int anim, int dir, int row, int c
 }
 
 int GestorImagenes::getPared_Value(int id,int random, int row, int col){
-    return paredArr[0][0][row][col];
+    return paredArr[id][random][row][col];
 }
 
 int GestorImagenes::getEntidad_NumRow(void){
