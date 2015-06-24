@@ -24,6 +24,7 @@ private:
     double pctMonstruo, pctArtefacto;
     int *nivelesMonstruo, *nivelesArtefacto;    
     Celda *inicio;
+    Celda *final;
     int nivel;
     
     void updateSize(int,int);
@@ -44,6 +45,9 @@ public:
     
     int getInicioY() const;
     int getInicioX() const;
+    
+    int getFinalY() const;
+    int getFinalX() const;
     
     int getN() const;
     int getM() const;
@@ -69,6 +73,7 @@ Laberinto::Laberinto(char **matriz,int m, int n){
             char tipo = matriz[j][i];
             matrixCelda[j][i] = new Celda(j,i,tipo);
             if (tipo == '-') inicio = matrixCelda[j][i];
+            if (tipo == '+') final = matrixCelda[j][i];
         }
     }    
     
@@ -163,6 +168,14 @@ int Laberinto::getInicioY() const {
 
 int Laberinto::getInicioX() const {
     return inicio->GetX();
+}
+
+int Laberinto::getFinalY() const {
+    return final->GetY();
+}
+
+int Laberinto::getFinalX() const {
+    return final->GetX();
 }
 
 int Laberinto::getN() const {

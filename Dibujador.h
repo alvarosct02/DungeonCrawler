@@ -19,6 +19,7 @@
 #define B_BLANCO 240
 #define WIN_W 59
 #define WIN_H 52
+#define log_size 4
 
 class Juego;
 
@@ -30,6 +31,7 @@ private:
     int B;
     int widthLeft;
     int inputPos;
+    string combatLog[log_size] ;
 public:
     
     Dibujador(Juego*,GestorImagenes*);
@@ -65,6 +67,8 @@ Dibujador::Dibujador(Juego *parent, GestorImagenes *gest) {
     inputPos = 0;
     myParent = parent;
     imageRep = gest;
+    for(int i=0; i<log_size;i++)
+        combatLog[i] = "";
     A = 0;
     B = 0;
 }
@@ -89,14 +93,25 @@ void Dibujador::borrarLinea(int y, int x, int dist) {
 //    dibujarCeldas(hero,map);
 }
 void Dibujador::writeCommand(string cad = ""){
-    borrarLinea(inputPos,1,widthLeft);
+    borrarLinea(inputPos,1,widthLeft); //modificar aqui la linea de comando **
     if (cad != "")
         cout << cad;   
 }
 void Dibujador::writeCommandComment(string cad = ""){
-    borrarLinea(inputPos+1,1,widthLeft);
-    if (cad != "")
-        cout << cad;   
+//    borrarLinea(inputPos+1,1,widthLeft);
+    if(cad != ""){
+        for(int i=log_size-1;i>0;i--){
+            combatLog[i] = combatLog[i-1];
+            borrarLinea(inputPos-i-3,1,widthLeft);
+            cout << combatLog[i] << endl;
+        }
+        combatLog[0] = cad;
+        borrarLinea(inputPos-0-3,1,widthLeft);
+        cout << combatLog[0] << endl;
+    
+    }
+//    if (cad != "")
+//        cout << cad;   
 }
 void Dibujador::writeCommandList(string){
     
@@ -184,7 +199,7 @@ int Dibujador::escogerAvatar(void){
 void Dibujador::setSize(int b, int a) {
     A = a;
     B = b;    
-    inputPos = 7 + 2*(B+1);        
+    inputPos = 40;        
     widthLeft = max(widthLeft,2 + 2*(A+1));    
     dibujarFondo();    
 }

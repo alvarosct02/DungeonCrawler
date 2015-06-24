@@ -381,7 +381,22 @@ bool Juego::moverTo(int dir){
     } 
 //    Ir al NIVEL anterior
     else if (laberintoActual->getCelda(destY,destX) == '-'){  
-        dibujador->writeCommandComment("Vamos al nivel anterior");
+//        dibujador->writeCommandComment("Vamos al nivel anterior");
+        
+        int lastNivel = -1 + laberintoActual->getNivel();
+        if (0 == lastNivel)  {
+            dibujador->writeCommandComment("No puedes volver atras");
+            return false;
+        }
+        else{
+            laberintoActual = listaLaberintos[lastNivel-1];
+            int lastX = laberintoActual->getFinalX();    
+            int lastY = laberintoActual->getFinalY();
+    //        avatar->setPosX(lastX);                                                    //JJ: ESTO NO DEBERIA HACERSE CON ENTIDAD::MOVER??
+    //        avatar->setPosY(lastY);  
+            avatar->mover(lastY,lastX);
+            dibujador->dibujarLaberinto(avatar,laberintoActual);
+        }
     }
 //    Mover a la celda indicada
     else if (laberintoActual->getCelda(destY,destX) == ' '){
