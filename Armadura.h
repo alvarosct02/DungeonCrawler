@@ -13,15 +13,19 @@
 
 class Armadura : public Artefacto {
 public:
+    Armadura();
     Armadura(int,int);
     virtual ~Armadura();    
     void usar(Entidad* entidad);
 private:
-    int defensa;
 };
 
+Armadura::Armadura(){
+}
+
 Armadura::Armadura(int def, int id){
-    defensa = def;
+    setTipo("armadura");
+    setEff(def);
     setIdImg(id);
 }
 

@@ -25,7 +25,7 @@ public:
 };
 
 GestorLaberinto::~GestorLaberinto() {   
-    cout << "   Gestor Destruido\n";
+//    cout << "   Gestor Destruido\n";
 } 
 GestorLaberinto::GestorLaberinto() {    
     archivo.open("labFile.txt", ios::in);

@@ -19,6 +19,8 @@ private:
     int posY;
     int maxVida;
     int vidaActual;
+    int def;
+    int atk;    
     string nombre;
     int idImg;
     
@@ -41,14 +43,28 @@ public:
     int getPosX() const;
     virtual ~Entidad(void);
     
-    void agregarObjeto(Artefacto*);
+    int agregarObjeto(Artefacto*);
     void listarObjetos(void);
     void getObjeto(int);
     void setIdImg(int idImg);
-    int getIdImg() const; 
+    int getIdImg() const;
+    
+    void setAtk(int atk);
+    int getAtk() const;
+    void setDef(int def);
+    int getDef() const; 
+        
+    int takeDamage(int);
 };
 
-void Entidad::agregarObjeto(Artefacto* obj){
+int Entidad::takeDamage(int dano){
+    int trueDamage = dano - getDef();
+    int curLife = min(0,getVidaActual()-trueDamage);
+    setVidaActual(curLife);
+    return curLife;
+}
+
+int Entidad::agregarObjeto(Artefacto* obj){
     saco->agregarObjeto(obj);
 }
 
@@ -68,6 +84,22 @@ int Entidad::getIdImg() const {
     return idImg;
 }
 
+void Entidad::setAtk(int atk) {
+    this->atk = atk;
+}
+
+int Entidad::getAtk() const {
+    return atk;
+}
+
+void Entidad::setDef(int def) {
+    this->def = def;
+}
+
+int Entidad::getDef() const {
+    return def;
+}
+
 Entidad::Entidad(){
     
 }
@@ -76,7 +108,8 @@ Entidad::Entidad(string name,int y,int x,int health){
     setNombre(name);
     setPosX(x);
     setPosY(y);
-    setMaxVida(health);    
+    setMaxVida(health);
+    setVidaActual(health);
     saco = new Saco();
     setIdImg(0);
 }

@@ -16,9 +16,10 @@ class Entidad;
 class Artefacto {
 protected:
     string nombre;
-    string descripcion;
-    int tamMax;   
+    string descripcion;  
     int idImg;
+    string tipo;
+    int eff;
     
 public:
     Artefacto();
@@ -26,6 +27,11 @@ public:
     virtual void usar(Entidad* entidad)=0;
     void setIdImg(int idImg);
     int getIdImg() const;
+    void setTipo(string tipo);
+    string getTipo() const;
+    void setEff(int eff);
+    int getEff() const;
+    
 };
 
 Artefacto::~Artefacto() {
@@ -34,7 +40,7 @@ Artefacto::~Artefacto() {
 
 Artefacto::Artefacto() {
     nombre = "sin_nombre";
-    tamMax = 0;
+    setTipo("");
 }
 
 void Artefacto::usar(Entidad* entidad){
@@ -48,6 +54,22 @@ void Artefacto::setIdImg(int idImg) {
 
 int Artefacto::getIdImg() const {
     return idImg;
+}
+
+void Artefacto::setTipo(string tipo) {
+    this->tipo = tipo;
+}
+
+string Artefacto::getTipo() const {
+    return tipo;
+}
+
+void Artefacto::setEff(int eff) {
+    this->eff = eff;
+}
+
+int Artefacto::getEff() const {
+    return eff;
 }
 
 #endif	/* ARTEFACTO_H */

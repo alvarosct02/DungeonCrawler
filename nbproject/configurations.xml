@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Arma.h</itemPath>
       <itemPath>Armadura.h</itemPath>
       <itemPath>Artefacto.h</itemPath>
       <itemPath>Avatar.h</itemPath>
@@ -70,6 +71,8 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Arma.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Armadura.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Artefacto.h" ex="false" tool="3" flavor2="0">
@@ -161,6 +164,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Arma.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Armadura.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Artefacto.h" ex="false" tool="3" flavor2="0">

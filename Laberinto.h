@@ -92,7 +92,7 @@ Laberinto::~Laberinto() {
     delete [] nivelesMonstruo; 
     delete [] nivelesArtefacto; 
     
-    cout << "Laberinto Destruido" << endl;
+//    cout << "Laberinto Destruido" << endl;
 }
 
 void Laberinto::imprimir(void){

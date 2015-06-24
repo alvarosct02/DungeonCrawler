@@ -19,7 +19,6 @@
 #include <ctime>
 #include <cmath>
 #include <conio.h> 
-#define SIZE 5
 #define PI 3.14159
 #define A 7
 #define B 10
@@ -48,9 +47,12 @@ private:
     bool cmd_MoverManual(void);  
     bool cmd_MoverKeyboard(void);
     bool cmd_SalirJuego(void);    
-    bool cmd_Interactuar(void);    
-    bool cmd_Usar(void);
-    bool cmd_Batalla(void);
+    bool cmd_Atacar(Monstruo*);        
+    bool cmd_AtacarMonstruo(Monstruo*);  
+    bool cmd_Huir(void);
+    bool cmd_UsarItem(void);  
+    bool cmd_Interactuar(void); 
+    bool cmd_Batalla(Monstruo*);
     
     bool moverTo(int);
    
@@ -231,22 +233,22 @@ void Juego::initJuego(void){
 
 Juego::~Juego() {
     laberintoActual = NULL;
-    cout << cantLab << endl;;
+//    cout << cantLab << endl;;
     for (int j= 0; j< cantLab; j++){
         
         
-        cout << "Hay " << cantMonstruos[j] << " Monstruos" << endl;
+//        cout << "Hay " << cantMonstruos[j] << " Monstruos" << endl;
         for (int i=0; i< cantMonstruos[j]; i++ )
             delete matrizMonstruos[j][i];        
         delete [] matrizMonstruos[j];
         
-        cout << "Hay " << cantArtefactos[j] << " Artefactos" << endl;
+//        cout << "Hay " << cantArtefactos[j] << " Artefactos" << endl;
         for (int i=0; i< cantArtefactos[j]; i++ )
             delete matrizArtefactos[j][i];        
         delete [] matrizArtefactos[j];          
         
         delete listaLaberintos[j];
-        cout << endl;
+//        cout << endl;
         
         
     }
@@ -297,30 +299,64 @@ bool Juego::ejecutarComando(string comando) {
 //    Limpiar espacio Comando
     return flag;
 }
-bool Juego::cmd_Batalla(void){
-    string comando;
-    while(true){
-        cin >> comando;
-            if(comando == "atacar"){
-               dibujador->console("El jugador ataca al enemigo"); 
-               
-            }
-            else if(comando == "cambiar"){
-               dibujador->console("Cambiar de equipo"); 
-            }
-            else if(comando == "huir"){
-               dibujador->console("Huir!!"); 
-               break;
-            }
-            else {
-                dibujador->console("Error Comando de ataque Invalido");
-            }
-    }
-      
+
+bool Juego::cmd_Atacar(Monstruo *monst){
+    int dano = avatar->getAtk();
+    monst->takeDamage(dano);
+    if (monst->getVidaActual() == 0) return true;
+    return false;
+    dibujador->console("El jugador ataca al enemigo"); 
 }
-bool Juego::cmd_Usar(void) {
+
+bool Juego::cmd_AtacarMonstruo(Monstruo *monst){
+    dibujador->console("El monstruo ataca al jugador"); 
+}
+
+bool Juego::cmd_Huir(void){
     return false;
 }
+
+bool Juego::cmd_UsarItem(void){    
+    dibujador->console("Cambiar de equipo");
+}
+
+bool Juego::cmd_Batalla(Monstruo* monst){
+    string comando;
+    bool flag;
+    flag = false;
+    while(true){
+        cin >> comando;
+        if(comando == "atacar"){ 
+            if ( cmd_Atacar(monst) ){
+//                Murio el monstruo
+                dibujador->console("Has matado al monstruo");
+                break;
+            } 
+            if ( cmd_AtacarMonstruo(monst) ){
+//                Murio el avatar
+                
+                dibujador->console("Has sido asesinado");
+                return true;
+            } 
+            
+        } else if(comando == "usar"){
+            
+            cmd_UsarItem();
+            
+            if ( cmd_AtacarMonstruo(monst) ){
+//                Murio el avatar                
+                dibujador->console("Has sido asesinado");
+                return true;
+            }             
+        } else if (comando == "huir"){
+            break;
+        } else {            
+            dibujador->console("Error Comando de ataque Invalido");
+        }
+    }
+    return flag;      
+}
+
 bool Juego::cmd_Interactuar(void) {
     int dir;
     dir = avatar->getDir();    
@@ -335,18 +371,24 @@ bool Juego::cmd_Interactuar(void) {
     if (laberintoActual->getCelda(destY,destX) == 'A'){
         dibujador->console("Es un artefacto");
         Celda* celda = laberintoActual->getCeldaPtr(destY,destX);
-        avatar->agregarObjeto(celda->GetArtefacto());
-        avatar->listarObjetos();
-        celda->SetArtefacto(NULL);
+        int add = avatar->agregarObjeto(celda->GetArtefacto());
+        if (add == -1){
+            dibujador->console("El saco esta como tu culo, lleno");
+        }
+        else{
+            avatar->listarObjetos();
+            celda->SetArtefacto(NULL);
+        }
     }
     else if (laberintoActual->getCelda(destY,destX) == 'M'){
         dibujador->console("Es un monstruo");
-        dibujador->dibujarMonstruoInfo((laberintoActual->getCeldaPtr(destY,destX))->GetMonstruo()); //aca no se caera
+        Monstruo* monst = (laberintoActual->getCeldaPtr(destY,destX))->GetMonstruo();
+        dibujador->dibujarMonstruoInfo(monst); //aca no se caera
         dibujador->writeCommandList(1);
 //        Celda* celda = laberintoActual->getCeldaPtr(destY,destX);
 //        avatar->agregarObjeto(celda->GetMonstruo());
 //        celda->SetArtefacto(NULL);
-        return cmd_Batalla();
+        return cmd_Batalla(monst);
     } 
     else {
         dibujador->console("Aqui no hay nada");

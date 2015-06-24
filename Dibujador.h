@@ -102,7 +102,7 @@ void Dibujador::borrarLinea(int y, int x, int dist) {
 //    dibujarCeldas(hero,map);
 }
 void Dibujador::writeCommand(string cad = ""){
-    borrarLinea(inputPos,1,widthLeft); //modificar aqui la linea de comando **
+    borrarLinea(inputPos,6,widthLeft); //modificar aqui la linea de comando **
     if (cad != "")
         cout << cad;   
 }
@@ -111,11 +111,11 @@ void Dibujador::console(string cad = ""){
     if(cad != ""){
         for(int i=log_size-1;i>0;i--){
             combatLog[i] = combatLog[i-1];
-            borrarLinea(inputPos-i-3,1,widthLeft);
+            borrarLinea(inputPos-i-3,3,widthLeft);
             cout << combatLog[i] << endl;
         }
         combatLog[0] = cad;
-        borrarLinea(inputPos-0-3,1,widthLeft);
+        borrarLinea(inputPos-0-3,3,widthLeft);
         cout << combatLog[0] << endl;
     
     }
@@ -216,7 +216,7 @@ int Dibujador::escogerAvatar(void){
 void Dibujador::setSize(int b, int a) {
     A = a;
     B = b;    
-    inputPos = 40;        
+    inputPos = 49;        
     widthLeft = max(widthLeft,2 + 2*(A+1));    
     dibujarFondo();    
 }
@@ -290,9 +290,6 @@ void Dibujador::dibujarCeldas(Avatar *hero, Laberinto *map) {
 void Dibujador::dibujarLaberinto(Avatar *hero, Laberinto *map) {    
     dibujarCeldas(hero,map);
     dibujarZoom(hero,map);
-    dibujarYX(inputPos-1,1);
-    cout << "Ingrese comando:";
-    dibujarYX(inputPos,1);
 }
 
 void Dibujador::setWindowsSize(int h, int w){
@@ -335,6 +332,10 @@ void Dibujador::dibujarFondo() {
     drawRect(34,1,15,30,16*15);
     drawRect(17,34,14,21,16*15);
     drawRect(34,34,15,21,16*15);
+    
+    dibujarYX(inputPos,2);
+    cout << "CMD:";
+    
 //    drawRect(1,1,30,30,16*15);
     
 //    dibujarYX(1,1);

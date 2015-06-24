@@ -11,7 +11,8 @@
 //class Entidad;
 #include "Artefacto.h"
 #include "Armadura.h"
-#define SIZE 6
+#include "Arma.h"
+#define SIZE_SACO 6
 //class Artefacto{};
 class Saco {
 public:
@@ -19,48 +20,54 @@ public:
     Saco(const Saco& orig);
     virtual ~Saco();
     
-    void agregarObjeto(Artefacto*);
+    int agregarObjeto(Artefacto*);
     void listarObjetos(void);
     void getObjeto(int);    
     
 private:
     Artefacto **listaObjetos;
-    int cantArtef;
-    void agrandarSaco(int);
+    Artefacto *curArmadura;
+    Artefacto *curArma;
     
+    int cantArtef;
+//    void agrandarSaco(int);
 };
 
 void Saco::listarObjetos(void){
     if (cantArtef == 0) cout << "Saco Vacio\n";
     else cout << cantArtef << endl;
-//    for (int i=0; i<cantArtef; i++){
-//        
-//    }
 }
 
-void Saco::getObjeto(int pos){
-    
+void Saco::getObjeto(int pos){    
 } 
 
-void Saco::agrandarSaco(int cant){   
-    Artefacto **aux = new Artefacto* [cant+SIZE];
-    for (int i=0; i<cant; i++) aux[i] = listaObjetos[i];
-    delete [] listaObjetos;
-    listaObjetos = aux;
-}
+//void Saco::agrandarSaco(int cant){   
+//    Artefacto **aux = new Artefacto* [cant+SIZE_SACO];
+//    for (int i=0; i<cant; i++) aux[i] = listaObjetos[i];
+//    delete [] listaObjetos;
+//    listaObjetos = aux;
+//}
 
-void Saco::agregarObjeto(Artefacto*obj){
-    if (cantArtef != 0 && (cantArtef % SIZE) == 0 ){
-        agrandarSaco(cantArtef);        
-    }
-    listaObjetos[cantArtef] = obj;
-    cantArtef ++;
+int Saco::agregarObjeto(Artefacto*obj){
+    
+    if (curArma == NULL && obj->getTipo() == "arma"){
+        curArma = obj;
+    } else if (curArmadura == NULL && obj->getTipo() == "armadura"){
+        curArmadura = obj;   
+    } else if (cantArtef == SIZE_SACO){
+        return -1;
+    } else {        
+        listaObjetos[cantArtef] = obj;
+        cantArtef ++;
+    }        
 }
 
 Saco::Saco() {
+//    curAr
     cantArtef = 1;
-    listaObjetos = new Artefacto*[SIZE];    
-    listaObjetos[0] = new Armadura(10,0);
+    listaObjetos = new Artefacto*[SIZE_SACO];  
+    curArma = NULL;
+    curArmadura = NULL;
 }
 
 Saco::Saco(const Saco& orig) {
