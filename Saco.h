@@ -21,8 +21,12 @@ public:
     virtual ~Saco();
     
     int agregarObjeto(Artefacto*);
-    void listarObjetos(void);
-    void getObjeto(int);    
+    void listarObjetos(void);   
+    void cambiarArma(int); 
+    void cambiarArmadura(int);
+       
+    Artefacto* getObjeto(int); 
+    void setObjeto(Artefacto*,int);
     
 private:
     Artefacto **listaObjetos;
@@ -33,12 +37,29 @@ private:
 //    void agrandarSaco(int);
 };
 
+void Saco::cambiarArma(int index){
+    Artefacto* aux = curArma;
+    curArma = getObjeto(index);
+    setObjeto(aux,index);
+}
+
+void Saco::cambiarArmadura(int index){
+    Artefacto* aux = curArmadura;
+    curArmadura = getObjeto(index);
+    setObjeto(aux,index);
+}
+
 void Saco::listarObjetos(void){
     if (cantArtef == 0) cout << "Saco Vacio\n";
     else cout << cantArtef << endl;
 }
 
-void Saco::getObjeto(int pos){    
+Artefacto* Saco::getObjeto(int pos){
+    return listaObjetos[pos] ;
+} 
+
+void Saco::setObjeto(Artefacto* artef, int pos){
+    listaObjetos[pos] = artef;
 } 
 
 //void Saco::agrandarSaco(int cant){   

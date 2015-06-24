@@ -13,13 +13,14 @@
 using namespace std;
 
 class Entidad;
+
 class Artefacto {
 protected:
     string nombre;
     string descripcion;  
     int idImg;
     string tipo;
-    int eff;
+    int eff;    
     
 public:
     Artefacto();

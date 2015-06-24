@@ -50,7 +50,7 @@ private:
     bool cmd_Atacar(Monstruo*);        
     bool cmd_AtacarMonstruo(Monstruo*);  
     bool cmd_Huir(void);
-    bool cmd_UsarItem(void);  
+    bool cmd_UsarItem(int );  
     bool cmd_Interactuar(void); 
     bool cmd_Batalla(Monstruo*);
     
@@ -303,9 +303,10 @@ bool Juego::ejecutarComando(string comando) {
 bool Juego::cmd_Atacar(Monstruo *monst){
     int dano = avatar->getAtk();
     monst->takeDamage(dano);
+    dibujador->console("Atacar al enemigo");
     if (monst->getVidaActual() == 0) return true;
     return false;
-    dibujador->console("El jugador ataca al enemigo"); 
+     
 }
 
 bool Juego::cmd_AtacarMonstruo(Monstruo *monst){
@@ -316,7 +317,9 @@ bool Juego::cmd_Huir(void){
     return false;
 }
 
-bool Juego::cmd_UsarItem(void){    
+bool Juego::cmd_UsarItem(int index){    
+    Artefacto* artef = avatar->getObjeto(index);
+    artef->usar(avatar);
     dibujador->console("Cambiar de equipo");
 }
 
@@ -339,9 +342,12 @@ bool Juego::cmd_Batalla(Monstruo* monst){
                 return true;
             } 
             
-        } else if(comando == "usar"){
+        } else if(comando == "usar"){            
+            int index;
             
-            cmd_UsarItem();
+            cin >> index;            
+            
+            cmd_UsarItem(index);
             
             if ( cmd_AtacarMonstruo(monst) ){
 //                Murio el avatar                

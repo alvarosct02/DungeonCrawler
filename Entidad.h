@@ -45,7 +45,7 @@ public:
     
     int agregarObjeto(Artefacto*);
     void listarObjetos(void);
-    void getObjeto(int);
+    Artefacto* getObjeto(int);
     void setIdImg(int idImg);
     int getIdImg() const;
     
@@ -55,6 +55,7 @@ public:
     int getDef() const; 
         
     int takeDamage(int);
+    Saco* getSaco();
 };
 
 int Entidad::takeDamage(int dano){
@@ -62,6 +63,10 @@ int Entidad::takeDamage(int dano){
     int curLife = min(0,getVidaActual()-trueDamage);
     setVidaActual(curLife);
     return curLife;
+}
+
+Saco* Entidad::getSaco(){
+    return saco;
 }
 
 int Entidad::agregarObjeto(Artefacto* obj){
@@ -72,8 +77,8 @@ void Entidad::listarObjetos(void){
     saco->listarObjetos();
 }
 
-void Entidad::getObjeto(int pos){
-    saco->getObjeto(pos);
+Artefacto* Entidad::getObjeto(int pos){
+    return saco->getObjeto(pos);
 }
 
 void Entidad::setIdImg(int idImg) {

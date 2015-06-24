@@ -11,6 +11,7 @@
 #include "Entidad.h"
 #include "Artefacto.h"
 
+class Saco;
 class Arma : public Artefacto {
 public:
     Arma();
@@ -33,9 +34,11 @@ Arma::Arma(int atk, int id){
 Arma::~Arma() {    
 }
 
-void Arma::usar(Entidad*entidad) {
-   
-//    cout << "La armadura "<<nombre<<" es usada por..." << entidad->getNombre() << endl; //se caga
+void Arma::usar(Entidad *entidad) {
+    
+//    Saco *saco = entidad->getSaco();
+//    
+//    saco->cambiarArma();
 }
 
 #endif	/* ARMA_H */
