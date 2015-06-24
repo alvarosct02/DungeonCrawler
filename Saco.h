@@ -10,7 +10,8 @@
 
 //class Entidad;
 #include "Artefacto.h"
-#define SIZE 5
+#include "Armadura.h"
+#define SIZE 6
 //class Artefacto{};
 class Saco {
 public:
@@ -57,8 +58,9 @@ void Saco::agregarObjeto(Artefacto*obj){
 }
 
 Saco::Saco() {
-    cantArtef = 0;
+    cantArtef = 1;
     listaObjetos = new Artefacto*[SIZE];    
+    listaObjetos[0] = new Armadura(10,0);
 }
 
 Saco::Saco(const Saco& orig) {

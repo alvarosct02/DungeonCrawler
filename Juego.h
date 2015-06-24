@@ -50,6 +50,7 @@ private:
     bool cmd_SalirJuego(void);    
     bool cmd_Interactuar(void);    
     bool cmd_Usar(void);
+    bool cmd_Batalla(void);
     
     bool moverTo(int);
    
@@ -225,6 +226,7 @@ void Juego::initJuego(void){
     
     dibujador->setSize(A,B);    
     dibujador->dibujarLaberinto(avatar,laberintoActual);
+    dibujador->writeCommandList(0);
 }
 
 Juego::~Juego() {
@@ -289,13 +291,33 @@ bool Juego::ejecutarComando(string comando) {
     } else if (comando == "interactuar"){
         flag = cmd_Interactuar();
     } else {        
-        dibujador->writeCommandComment("Error Comando Invalido");
+        dibujador->console("Error Comando Invalido");
     }
     
 //    Limpiar espacio Comando
     return flag;
 }
-
+bool Juego::cmd_Batalla(void){
+    string comando;
+    while(true){
+        cin >> comando;
+            if(comando == "atacar"){
+               dibujador->console("El jugador ataca al enemigo"); 
+               
+            }
+            else if(comando == "cambiar"){
+               dibujador->console("Cambiar de equipo"); 
+            }
+            else if(comando == "huir"){
+               dibujador->console("Huir!!"); 
+               break;
+            }
+            else {
+                dibujador->console("Error Comando de ataque Invalido");
+            }
+    }
+      
+}
 bool Juego::cmd_Usar(void) {
     return false;
 }
@@ -311,20 +333,23 @@ bool Juego::cmd_Interactuar(void) {
     
 //    Pasar al siguiente NIVEL
     if (laberintoActual->getCelda(destY,destX) == 'A'){
-        dibujador->writeCommandComment("Es un artefacto");
+        dibujador->console("Es un artefacto");
         Celda* celda = laberintoActual->getCeldaPtr(destY,destX);
         avatar->agregarObjeto(celda->GetArtefacto());
         avatar->listarObjetos();
         celda->SetArtefacto(NULL);
     }
     else if (laberintoActual->getCelda(destY,destX) == 'M'){
-        dibujador->writeCommandComment("Es un monstruo");
+        dibujador->console("Es un monstruo");
+        dibujador->dibujarMonstruoInfo((laberintoActual->getCeldaPtr(destY,destX))->GetMonstruo()); //aca no se caera
+        dibujador->writeCommandList(1);
 //        Celda* celda = laberintoActual->getCeldaPtr(destY,destX);
 //        avatar->agregarObjeto(celda->GetMonstruo());
 //        celda->SetArtefacto(NULL);
+        return cmd_Batalla();
     } 
     else {
-        dibujador->writeCommandComment("Aqui no hay nada");
+        dibujador->console("Aqui no hay nada");
         
     }
     dibujador->dibujarLaberinto(avatar,laberintoActual);
@@ -385,7 +410,7 @@ bool Juego::moverTo(int dir){
         
         int lastNivel = -1 + laberintoActual->getNivel();
         if (0 == lastNivel)  {
-            dibujador->writeCommandComment("No puedes volver atras");
+            dibujador->console("No puedes volver atras");
             return false;
         }
         else{
@@ -401,18 +426,18 @@ bool Juego::moverTo(int dir){
 //    Mover a la celda indicada
     else if (laberintoActual->getCelda(destY,destX) == ' '){
         avatar->mover(destY,destX);
-        dibujador->writeCommandComment();
+        dibujador->console();
     } 
 //    Mostrar el error correspondiente
     else if (laberintoActual->getCelda(destY,destX) == 'M'){
         avatar->mover(destY,destX);
-        dibujador->writeCommandComment();
+        dibujador->console();
     } 
     else if (laberintoActual->getCelda(destY,destX) == 'A'){
-        dibujador->writeCommandComment("Wow es un artefacto!");
+        dibujador->console("Wow es un artefacto!");
     } 
     else{        
-        dibujador->writeCommandComment("Error: Es una pared");
+        dibujador->console("Error: Es una pared");
     }    
     return false;
 }
@@ -424,7 +449,7 @@ bool Juego::cmd_MoverManual(void){
     string aux;
     int dir;
     
-    dibujador->writeCommandComment("Falta ingresar direccion");    
+    dibujador->console("Falta ingresar direccion");    
     dibujador->writeCommand("mover ");    
     cin >> aux;          
     dibujador->writeCommand();
@@ -434,7 +459,7 @@ bool Juego::cmd_MoverManual(void){
     else if (aux == "a") dir = 2;
     else if (aux == "s") dir = 1;
     else{
-        dibujador->writeCommandComment("Error: Direccion invalida");    
+        dibujador->console("Error: Direccion invalida");    
         return false;
     }
     return moverTo(dir);

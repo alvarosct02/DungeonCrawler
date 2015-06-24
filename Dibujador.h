@@ -37,8 +37,8 @@ public:
     Dibujador(Juego*,GestorImagenes*);
     
     void writeCommand(string);
-    void writeCommandComment(string);
-    void writeCommandList(string);
+    void console(string);
+    void writeCommandList(int);
     
     void setSize(int,int);
     void dibujarLaberinto(Avatar*,Laberinto*);
@@ -59,9 +59,18 @@ public:
     void mostrarEspacio(int,int,int);  
     void mostrarMonstruo(int,int,int);  
     void drawRect(int,int,int,int,int);
+    
+    void dibujarMonstruoInfo(Monstruo* monstruo);
+    
+    
+    
 };
 
-
+void Dibujador::dibujarMonstruoInfo(Monstruo* monstruo){
+//    drawRect();
+    //aqui haremos algo de dibujar al monstruo
+    console("Le agarro el pene al monstruo!");
+}
 Dibujador::Dibujador(Juego *parent, GestorImagenes *gest) {
     widthLeft = 30;
     inputPos = 0;
@@ -97,7 +106,7 @@ void Dibujador::writeCommand(string cad = ""){
     if (cad != "")
         cout << cad;   
 }
-void Dibujador::writeCommandComment(string cad = ""){
+void Dibujador::console(string cad = ""){
 //    borrarLinea(inputPos+1,1,widthLeft);
     if(cad != ""){
         for(int i=log_size-1;i>0;i--){
@@ -113,8 +122,16 @@ void Dibujador::writeCommandComment(string cad = ""){
 //    if (cad != "")
 //        cout << cad;   
 }
-void Dibujador::writeCommandList(string){
-    
+void Dibujador::writeCommandList(int id){
+    //segun el int escribe tipos de comandos
+    switch(id){
+        case 0: 
+            console("Comandos Normales");
+            break;
+        case 1:
+            console("Comandos de Batalla");
+            break; 
+    }
 }
 
 void Dibujador::mostrarAvatarFull(int id,int y, int x){    

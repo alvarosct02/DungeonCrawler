@@ -1,5 +1,5 @@
 import cv2
-nombre = "pared4"
+nombre = "yellow"
 
 img = cv2.imread(nombre + ".bmp",1)
 
@@ -14,8 +14,8 @@ espadas = []
 a0 = 2
 b0 = 1
 size = 10
-n = 1 #filas
-m = 4 #columnas
+n = 4 #filas
+m = 2 #columnas
 for a in range(a0,n*(size+1)+a0,size+1):
 	for b in range(b0,m*(size+1)+b0,size+1):
 		espada = []
