@@ -17,8 +17,8 @@
 
 
 #define B_BLANCO 240
-#define WIN_W 80
-#define WIN_H 70
+#define WIN_W 59
+#define WIN_H 52
 
 class Juego;
 
@@ -56,6 +56,7 @@ public:
     void mostrarArma(int,int,int);  
     void mostrarEspacio(int,int,int);  
     void mostrarMonstruo(int,int,int);  
+    void drawRect(int,int,int,int,int);
 };
 
 
@@ -101,11 +102,6 @@ void Dibujador::writeCommandList(string){
     
 }
 
-
-
-
-
-
 void Dibujador::mostrarAvatarFull(int id,int y, int x){    
     for (int j = 0 ; j<16; j++)
         for (int i=0; i< 16; i++)
@@ -122,30 +118,21 @@ void Dibujador::mostrarAvatarFull(int id,int y, int x){
 
 void Dibujador::mostrarAvatar(int id,int anim, int dir, int y, int x){  
     for (int j = 0 ; j< 10; j++){
-        for (int i=0; i< 10; i++){
-            if (j==0 || j== 9 || i == 0 || i == 9){                
-                dibujarYX(j+y,i+x,' ');
-            } else {                
-                int val = 16* imageRep->getPersonaje_Value(id,anim,dir,j-1,i-1);
-                dibujarYX(j+y,i+x,' ',val);
-            }
-            //            personajeArr[count][j][i] = val;
+        for (int i=0; i< 10; i++){                   
+            int val = 16* imageRep->getPersonaje_Value(id,anim,dir,j,i);
+            dibujarYX(j+y,i+x,' ',val);
         }
     }
 }
 
 void Dibujador::mostrarPared(int id,int random, int y,int x){
     for (int j = 0 ; j< 10; j++){
-        for (int i=0; i< 10; i++){
-            if (j==0 || j== 9 || i == 0 || i == 9){                
-                dibujarYX(j+y,i+x,' ');
-            } else {                
-                int val = 16* imageRep->getPared_Value(id,random,j-1,i-1);
-                dibujarYX(j+y,i+x,' ',val);
-            }
-            //            personajeArr[count][j][i] = val;
+        for (int i=0; i< 10; i++){                   
+            int val = 16* imageRep->getPared_Value(id,random,j,i);
+            dibujarYX(j+y,i+x,' ',val);
         }
-    }
+    }         
+              
 }
 
 void Dibujador::mostrarEspacio(int id,int y, int x){  
@@ -156,30 +143,20 @@ void Dibujador::mostrarEspacio(int id,int y, int x){
 
 void Dibujador::mostrarArma(int id,int y, int x){  
     for (int j = 0 ; j< 10; j++){
-        for (int i=0; i< 10; i++){
-            if (j==0 || j== 9 || i == 0 || i == 9){                
-                dibujarYX(j+y,i+x,' ');
-            } else {                
-                int val = 16* imageRep->getArma_Value(id,j-1,i-1);
-                dibujarYX(j+y,i+x,' ',val);
-            }
-            //            personajeArr[count][j][i] = val;
+        for (int i=0; i< 10; i++){                   
+            int val = 16* imageRep->getArma_Value(id,j,i);
+            dibujarYX(j+y,i+x,' ',val);
         }
-    }
+    } 
 }
 
 void Dibujador::mostrarMonstruo(int id,int y, int x){  
     for (int j = 0 ; j< 10; j++){
-        for (int i=0; i< 10; i++){
-            if (j==0 || j== 9 || i == 0 || i == 9){                
-                dibujarYX(j+y,i+x,' ');
-            } else {                
-                int val = 16* imageRep->getMonstruo_Value(id,j-1,i-1);
-                dibujarYX(j+y,i+x,' ',val);
-            }
-            //            personajeArr[count][j][i] = val;
+        for (int i=0; i< 10; i++){                   
+            int val = 16* imageRep->getMonstruo_Value(id,j,i);
+            dibujarYX(j+y,i+x,' ',val);
         }
-    }
+    } 
 }
 
 int Dibujador::escogerAvatar(void){
@@ -209,16 +186,15 @@ void Dibujador::setSize(int b, int a) {
     B = b;    
     inputPos = 7 + 2*(B+1);        
     widthLeft = max(widthLeft,2 + 2*(A+1));    
-    dibujarFondo();
-    
+    dibujarFondo();    
 }
 
 
 
 void Dibujador::dibujarZoom(Avatar *hero, Laberinto *map){
 //    dibujarYX(4,ancho1+3,' ',B_BLANCO); este es el offset inicial
-    int initX = widthLeft+3;
-    int initY = 4;
+    int initX = 2;
+    int initY = 2;
     
     int posX = hero->getPosX();
     int posY = hero->getPosY();  
@@ -255,8 +231,8 @@ void Dibujador::dibujarCeldas(Avatar *hero, Laberinto *map) {
     int posX = hero->getPosX();
     int posY = hero->getPosY();  
     
-    int initX = 1;
-    int initY = 4;
+    int initX = 34;
+    int initY = 34;
     
 //    Pintar el Espacio del Laberinto (esq. superior izquierda)
     for (int j = posY-B-1, j2 = initY; j2<=initY+2*B+2; j++, j2++){
@@ -301,28 +277,52 @@ void Dibujador::setWindowsSize(int h, int w){
     SetConsoleWindowInfo(OutputH,TRUE,&r);
     
 }
-void Dibujador::dibujarFondo() {
+
+void Dibujador::drawRect(int y, int x, int h, int w, int color){
+    h++;
+    w++;
+    
+    for (int i = 0; i<=w; i++){
+        dibujarYX(y, x+i,' ',color);
+        dibujarYX(y+h, x+i,' ',color);
+    }   
+    for (int i = 0; i<=h; i++){
+        dibujarYX(y+i, x,' ',color);
+        dibujarYX(y+i, x+w,' ',color);
+    }
+}
+
+void Dibujador::dibujarFondo() {   
+    
+    int initY = 1;
+    int initX = 1;
+    
     setWindowsSize(WIN_H,WIN_W);
-    dibujarYX(1,1);
-    cout << "Dungeon Crawler";
-    dibujarYX(2,1);
-    for (int i = 0; i<78; i++)
-        cout << '_';
-    for (int i = 3; i<inputPos+3; i++)
-        dibujarYX(i,widthLeft+1,'|');
     
-    dibujarYX(inputPos-3,widthLeft+3);  cout << "Comandos:";
-    dibujarYX(inputPos-2,widthLeft+3);  cout << " mover";
-    dibujarYX(inputPos-1,widthLeft+3);  cout << " usar";
-    dibujarYX(inputPos,widthLeft+3);    cout << " exit";
+    drawRect(1,1,30,30,16*15);
+    drawRect(34,1,15,30,16*15);
+    drawRect(17,34,14,21,16*15);
+    drawRect(34,34,15,21,16*15);
+//    drawRect(1,1,30,30,16*15);
     
-    dibujarYX(inputPos-3,widthLeft+17); cout << "Direcciones:";
-    dibujarYX(inputPos-2,widthLeft+17); cout << " derecha   (d)";
-    dibujarYX(inputPos-1,widthLeft+17); cout << " arriba    (w)";
-    dibujarYX(inputPos,widthLeft+17);   cout << " izquierda (a)";
-    dibujarYX(inputPos+1,widthLeft+17); cout << " abajo     (s)";
-    
-    
+//    dibujarYX(1,1);
+//    cout << "Dungeon Crawler";
+//    dibujarYX(2,1);
+//    for (int i = 0; i<78; i++)
+//        cout << '_';
+//    for (int i = 3; i<inputPos+3; i++)
+//        dibujarYX(i,widthLeft+1,'|');
+//
+//    dibujarYX(inputPos-3,widthLeft+3);  cout << "Comandos:";
+//    dibujarYX(inputPos-2,widthLeft+3);  cout << " mover";
+//    dibujarYX(inputPos-1,widthLeft+3);  cout << " usar";
+//    dibujarYX(inputPos,widthLeft+3);    cout << " exit";
+//
+//    dibujarYX(inputPos-3,widthLeft+17); cout << "Direcciones:";
+//    dibujarYX(inputPos-2,widthLeft+17); cout << " derecha   (d)";
+//    dibujarYX(inputPos-1,widthLeft+17); cout << " arriba    (w)";
+//    dibujarYX(inputPos,widthLeft+17);   cout << " izquierda (a)";
+//    dibujarYX(inputPos+1,widthLeft+17); cout << " abajo     (s)";
 }
 
 

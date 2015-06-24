@@ -21,8 +21,8 @@
 #include <conio.h> 
 #define SIZE 5
 #define PI 3.14159
-#define A 15
-#define B 15
+#define A 7
+#define B 10
 
 class Juego {
 private:
@@ -38,7 +38,6 @@ private:
     Dibujador *dibujador;
     GestorImagenes *gestAvatar;
     GestorLaberinto gestLab;
-//    bool win
     
     void cargarLaberintos(void);
     void desordenarLaberintos(void);
