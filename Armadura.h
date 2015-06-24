@@ -29,7 +29,8 @@ Armadura::~Armadura() {
 }
 
 void Armadura::usar(Entidad*entidad) {
-    cout << "La armadura "<<nombre<<" es usada por..." << entidad->getNombre() << endl;
+   
+//    cout << "La armadura "<<nombre<<" es usada por..." << entidad->getNombre() << endl; //se caga
 }
 
 #endif	/* ARMADURA_H */
