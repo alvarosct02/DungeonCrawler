@@ -21,6 +21,7 @@ protected:
     int idImg;
     string tipo;
     int eff;    
+    int sacoPos;
     
 public:
     Artefacto();
@@ -32,6 +33,8 @@ public:
     string getTipo() const;
     void setEff(int eff);
     int getEff() const;
+    void setSacoPos(int sacoPos);
+    int getSacoPos() const;
     
 };
 
@@ -42,6 +45,7 @@ Artefacto::~Artefacto() {
 Artefacto::Artefacto() {
     nombre = "sin_nombre";
     setTipo("");
+    setSacoPos(-1);
 }
 
 void Artefacto::usar(Entidad* entidad){
@@ -71,6 +75,14 @@ void Artefacto::setEff(int eff) {
 
 int Artefacto::getEff() const {
     return eff;
+}
+
+void Artefacto::setSacoPos(int sacoPos) {
+    this->sacoPos = sacoPos;
+}
+
+int Artefacto::getSacoPos() const {
+    return sacoPos;
 }
 
 #endif	/* ARTEFACTO_H */

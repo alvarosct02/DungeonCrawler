@@ -11,7 +11,6 @@
 #include "Entidad.h"
 #include "Artefacto.h"
 
-class Saco;
 class Arma : public Artefacto {
 public:
     Arma();
@@ -23,6 +22,7 @@ private:
 
 
 Arma::Arma(){
+    
 }
 
 Arma::Arma(int atk, int id){    
@@ -36,9 +36,11 @@ Arma::~Arma() {
 
 void Arma::usar(Entidad *entidad) {
     
-//    Saco *saco = entidad->getSaco();
-//    
-//    saco->cambiarArma();
+//    Saco *saco = entidad->getSaco();//   
+    Artefacto* mipinga = (entidad->getSaco())->getCurArma();
+    
+//    int pos = getSacoPos();
+//    aux->cambiarArma(pos);
 }
 
 #endif	/* ARMA_H */

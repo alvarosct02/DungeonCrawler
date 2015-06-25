@@ -11,7 +11,7 @@
 //class Entidad;
 #include "Artefacto.h"
 #include "Armadura.h"
-#include "Arma.h"
+//#include "Arma.h"
 #define SIZE_SACO 6
 //class Artefacto{};
 class Saco {
@@ -22,11 +22,17 @@ public:
     
     int agregarObjeto(Artefacto*);
     void listarObjetos(void);   
-    void cambiarArma(int); 
-    void cambiarArmadura(int);
+    void cambiarArma(Artefacto*); 
+    void cambiarArmadura(Artefacto*);
        
     Artefacto* getObjeto(int); 
     void setObjeto(Artefacto*,int);
+    void setCantArtef(int cantArtef);
+    int getCantArtef() const;
+    void setCurArma(Artefacto* curArma);
+    Artefacto* getCurArma() const;
+    void setCurArmadura(Artefacto* curArmadura);
+    Artefacto* getCurArmadura() const;
     
 private:
     Artefacto **listaObjetos;
@@ -37,16 +43,16 @@ private:
 //    void agrandarSaco(int);
 };
 
-void Saco::cambiarArma(int index){
+void Saco::cambiarArma(Artefacto *artef){
     Artefacto* aux = curArma;
-    curArma = getObjeto(index);
-    setObjeto(aux,index);
+    curArma = artef;
+    artef = aux;
 }
 
-void Saco::cambiarArmadura(int index){
+void Saco::cambiarArmadura(Artefacto *artef){
     Artefacto* aux = curArmadura;
-    curArmadura = getObjeto(index);
-    setObjeto(aux,index);
+    curArmadura = artef;
+    artef = aux;
 }
 
 void Saco::listarObjetos(void){
@@ -60,6 +66,30 @@ Artefacto* Saco::getObjeto(int pos){
 
 void Saco::setObjeto(Artefacto* artef, int pos){
     listaObjetos[pos] = artef;
+}
+
+void Saco::setCantArtef(int cantArtef) {
+    this->cantArtef = cantArtef;
+}
+
+int Saco::getCantArtef() const {
+    return cantArtef;
+}
+
+void Saco::setCurArma(Artefacto* curArma) {
+    this->curArma = curArma;
+}
+
+Artefacto* Saco::getCurArma() const {
+    return curArma;
+}
+
+void Saco::setCurArmadura(Artefacto* curArmadura) {
+    this->curArmadura = curArmadura;
+}
+
+Artefacto* Saco::getCurArmadura() const {
+    return curArmadura;
 } 
 
 //void Saco::agrandarSaco(int cant){   
