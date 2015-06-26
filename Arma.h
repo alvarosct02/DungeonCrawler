@@ -34,13 +34,9 @@ Arma::Arma(int atk, int id){
 Arma::~Arma() {    
 }
 
-void Arma::usar(Entidad *entidad) {
-    
-//    Saco *saco = entidad->getSaco();//   
-    Artefacto* mipinga = (entidad->getSaco())->getCurArma();
-    
-//    int pos = getSacoPos();
-//    aux->cambiarArma(pos);
+void Arma::usar(Entidad *entidad) {    
+    Saco *saco = entidad->getSaco();//   
+    saco->cambiarArma(this);
 }
 
 #endif	/* ARMA_H */

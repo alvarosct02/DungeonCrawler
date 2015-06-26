@@ -8,12 +8,9 @@
 #ifndef SACO_H
 #define	SACO_H
 
-//class Entidad;
 #include "Artefacto.h"
-#include "Armadura.h"
-//#include "Arma.h"
 #define SIZE_SACO 6
-//class Artefacto{};
+
 class Saco {
 public:
     Saco();

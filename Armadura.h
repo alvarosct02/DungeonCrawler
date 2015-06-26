@@ -32,7 +32,9 @@ Armadura::Armadura(int def, int id){
 Armadura::~Armadura() {    
 }
 
-void Armadura::usar(Entidad*entidad) {
+void Armadura::usar(Entidad* entidad) {
+    Saco *saco = entidad->getSaco();//   
+    saco->cambiarArmadura(this);
    
 //    cout << "La armadura "<<nombre<<" es usada por..." << entidad->getNombre() << endl; //se caga
 }

@@ -35,7 +35,12 @@ PocionCuracion::~PocionCuracion() {
 }
 
 void PocionCuracion::usar(Entidad* entidad){
-    cout << "La pocion de curacion "<< nombre<<"es usada por " << entidad->getNombre();
+//    Saco *saco = entidad->getSaco();//   
+//    saco->cambiarArma(this);
+    int curLife = entidad->getVidaActual();
+    int newLife = curLife + getEff();
+    entidad->setVidaActual( newLife);
+//    cout << "La pocion de curacion "<< nombre<<"es usada por " << entidad->getNombre();
 }
 
 

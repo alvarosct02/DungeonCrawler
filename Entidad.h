@@ -23,13 +23,15 @@ private:
     int atk;    
     string nombre;
     int idImg;
+    int atkSP;
+    int defSP;
     
 protected:
     Saco *saco;
     
 public:
     Entidad();
-    Entidad(string,int,int,int);
+    Entidad(string,int,int,int,int,int);
     void mover(int,int);
     void setNombre(string nombre);
     string getNombre() const;
@@ -56,11 +58,15 @@ public:
         
     int takeDamage(int);
     Saco* getSaco();
+    void setDefSP(int defSP);
+    int getDefSP() const;
+    void setAtkSP(int atkSP);
+    int getAtkSP() const;
 };
 
 int Entidad::takeDamage(int dano){
     int trueDamage = dano - getDef();
-    int curLife = min(0,getVidaActual()-trueDamage);
+    int curLife = max(0,getVidaActual()-trueDamage);
     setVidaActual(curLife);
     return curLife;
 }
@@ -68,6 +74,7 @@ int Entidad::takeDamage(int dano){
 Saco* Entidad::getSaco(){
     return saco;
 }
+
 
 int Entidad::agregarObjeto(Artefacto* obj){
     saco->agregarObjeto(obj);
@@ -94,7 +101,12 @@ void Entidad::setAtk(int atk) {
 }
 
 int Entidad::getAtk() const {
-    return atk;
+    int ataque = atk;
+    if (saco->getCurArma() != NULL){
+        ataque += saco->getCurArma()->getEff();
+    }
+    return ataque;
+    
 }
 
 void Entidad::setDef(int def) {
@@ -109,12 +121,19 @@ Entidad::Entidad(){
     
 }
 
-Entidad::Entidad(string name,int y,int x,int health){
+Entidad::Entidad(string name,int y,int x,int health,int atk,int def){
     setNombre(name);
     setPosX(x);
     setPosY(y);
     setMaxVida(health);
     setVidaActual(health);
+    
+    setAtk(atk);
+    setDef(def);    
+    
+    setAtkSP(0);
+    setDefSP(0);
+    
     saco = new Saco();
     setIdImg(0);
 }
@@ -166,6 +185,22 @@ void Entidad::setPosX(int posX) {
 
 int Entidad::getPosX() const {
     return posX;
+}
+
+void Entidad::setDefSP(int defSP) {
+    this->defSP = defSP;
+}
+
+int Entidad::getDefSP() const {
+    return defSP;
+}
+
+void Entidad::setAtkSP(int atkSP) {
+    this->atkSP = atkSP;
+}
+
+int Entidad::getAtkSP() const {
+    return atkSP;
 }
 
 #endif	/* ENTIDAD_H */

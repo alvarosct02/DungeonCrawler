@@ -60,16 +60,45 @@ public:
     void mostrarMonstruo(int,int,int);  
     void drawRect(int,int,int,int,int);
     
-    void dibujarMonstruoInfo(Monstruo* monstruo);
+    void drawInfo(Entidad*,int, int);
     
     
     
 };
 
-void Dibujador::dibujarMonstruoInfo(Monstruo* monstruo){
-//    drawRect();
-    //aqui haremos algo de dibujar al monstruo
-    console("Le agarro el pene al monstruo!");
+void Dibujador::drawInfo(Entidad* entidad, int tileY, int tileX){
+    int idImg = entidad->getIdImg();
+    
+//    int atk = entidad->
+//    Dibujar el Arma Actual
+    Artefacto *arma = entidad->getSaco()->getCurArmadura();
+    if (arma != NULL){
+        int itemIMG = arma->getIdImg();
+//      dibujar la imagen                
+    }
+    
+//    Dibujar el Armadura Actual
+    Artefacto *armadura = entidad->getSaco()->getCurArma();
+    if (armadura != NULL){
+        int itemIMG = armadura->getIdImg();
+//      dibujar la imagen                
+    }
+    
+//    Dibujar el saco
+    for (int j=0 ; j<2; j++){
+        for (int i=0; i<3 ; i++){
+            int pos = j*3 + i;
+            Artefacto *item = entidad->getSaco()->getObjeto(pos);
+            if (item != NULL){
+                int itemIMG = item->getIdImg();
+//                dibujar la imagen                
+            }             
+        }
+    }
+    
+    
+    
+    
 }
 Dibujador::Dibujador(Juego *parent, GestorImagenes *gest) {
     widthLeft = 30;

@@ -16,7 +16,7 @@ private:
     int anim; //0,1 
 public:
     Avatar(void);
-    Avatar(string,int,int,int,int);
+    Avatar(string,int,int,int,int,int,int);
     void setDir(int dir);
     int getDir() const;
     int getAnim() const;
@@ -24,12 +24,12 @@ public:
 
 
 Avatar::Avatar(void)
-    :Entidad("Alvaro",0,0,100){
+    :Entidad("Alvaro",0,0,100,10,10){
     dir = 0;
     anim = 0;
 }
-Avatar::Avatar(string name,int y,int x,int health,int imgID)
-    :Entidad(name,y,x,health){
+Avatar::Avatar(string name,int y,int x,int health,int imgID,int atk, int def)
+    :Entidad(name,y,x,health,atk,def){
     Entidad::setIdImg(imgID);
     dir = 0;  
     anim  = 0;

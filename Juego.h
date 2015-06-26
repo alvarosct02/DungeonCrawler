@@ -61,7 +61,9 @@ private:
     void agrandarListaMonstruo(Monstruo**&,int);
     void agrandarListaArtefacto(Artefacto**&,int);
     
-    void agregarMyA(Monstruo**&,Artefacto**&,int&,int&,Laberinto*);
+    void agregarMyA(int,Monstruo**&,Artefacto**&,int&,int&,Laberinto*);
+    
+    
 public:
     Juego();
     virtual ~Juego(void); 
@@ -94,7 +96,7 @@ void Juego::agrandarListaArtefacto(Artefacto** &lista,int cant){
     lista = aux;
 }
 
-void Juego::agregarMyA(Monstruo **&listaMonstruo,Artefacto **&listaArtefacto,int &cM, int &cA, Laberinto *lab){
+void Juego::agregarMyA(int nivel,Monstruo **&listaMonstruo,Artefacto **&listaArtefacto,int &cM, int &cA, Laberinto *lab){
     int randMonst = 0, randArtef = 0;
     int M = lab->getM();
     int N = lab->getN();    
@@ -106,7 +108,7 @@ void Juego::agregarMyA(Monstruo **&listaMonstruo,Artefacto **&listaArtefacto,int
 //            si celda vacia, Agregar el monstruo
             if (lab->estaVacia(j,i) && randMonst < lab->getPctMonstruo()){  
                 int id  = rand() % gestAvatar->getCountMonstruo();                   
-                Monstruo* monst = new Monstruo("Guanira",j,i,1,id);
+                Monstruo* monst = new Monstruo("Guanira",j,i,nivel+1,id,10,10);
                 lab->setMonstruo(j,i,monst);
                 if (cM != 0 && cM%SIZE == 0)
                     agrandarListaMonstruo(listaMonstruo,cM);
@@ -120,10 +122,10 @@ void Juego::agregarMyA(Monstruo **&listaMonstruo,Artefacto **&listaArtefacto,int
                 if (i%2 == 0){
                     
                     int id  = rand() % gestAvatar->getCountArma();      
-                    artef = new Armadura(4,id);
+                    artef = new Armadura(10,id);
                 } else {
                     int id  = rand() % gestAvatar->getCountArma();     
-                    artef = new PocionCuracion(4,id);
+                    artef = new PocionCuracion(10,id);
                 }
                 lab->setArtefacto(j,i,artef);
                 if (cA != 0 && cA%SIZE == 0)
@@ -196,10 +198,10 @@ void Juego::desordenarLaberintos(void){
         listaLaberintos[randIndex] = listaLaberintos[i];
         listaLaberintos[i] = aux;
         listaLaberintos[i]->setNivel(i);
-        agregarMyA(matrizMonstruos[i],matrizArtefactos[i],cantMonstruos[i],cantArtefactos[i],listaLaberintos[i]);  
+        agregarMyA(i,matrizMonstruos[i],matrizArtefactos[i],cantMonstruos[i],cantArtefactos[i],listaLaberintos[i]);  
     }
     listaLaberintos[cantLab-1]->setNivel(cantLab-1);
-    agregarMyA(matrizMonstruos[cantLab-1],matrizArtefactos[cantLab-1],
+    agregarMyA(cantLab-1,matrizMonstruos[cantLab-1],matrizArtefactos[cantLab-1],
         cantMonstruos[cantLab-1],cantArtefactos[cantLab-1],listaLaberintos[cantLab-1]);  
 
 }
@@ -224,7 +226,7 @@ void Juego::initJuego(void){
     
     
     int idAvatar = dibujador->escogerAvatar(); //ESTO LO DEBE HACER DIBJADOR
-    avatar = new Avatar("Alvaro",lastY,lastX,100,idAvatar);
+    avatar = new Avatar("Alvaro",lastY,lastX,100,idAvatar,10,10);
     
     dibujador->setSize(A,B);    
     dibujador->dibujarLaberinto(avatar,laberintoActual);
@@ -311,6 +313,7 @@ bool Juego::cmd_Atacar(Monstruo *monst){
 
 bool Juego::cmd_AtacarMonstruo(Monstruo *monst){
     dibujador->console("El monstruo ataca al jugador"); 
+    return false;
 }
 
 bool Juego::cmd_Huir(void){
@@ -328,6 +331,7 @@ bool Juego::cmd_Batalla(Monstruo* monst){
     bool flag;
     flag = false;
     while(true){
+        dibujador->writeCommand();
         cin >> comando;
         if(comando == "atacar"){ 
             if ( cmd_Atacar(monst) ){
@@ -389,7 +393,7 @@ bool Juego::cmd_Interactuar(void) {
     else if (laberintoActual->getCelda(destY,destX) == 'M'){
         dibujador->console("Es un monstruo");
         Monstruo* monst = (laberintoActual->getCeldaPtr(destY,destX))->GetMonstruo();
-        dibujador->dibujarMonstruoInfo(monst); //aca no se caera
+        dibujador->drawInfo(monst,4,41); //aca no se caera
         dibujador->writeCommandList(1);
 //        Celda* celda = laberintoActual->getCeldaPtr(destY,destX);
 //        avatar->agregarObjeto(celda->GetMonstruo());
@@ -478,7 +482,7 @@ bool Juego::moverTo(int dir){
     } 
 //    Mostrar el error correspondiente
     else if (laberintoActual->getCelda(destY,destX) == 'M'){
-        avatar->mover(destY,destX);
+//        avatar->mover(destY,destX);
         dibujador->console();
     } 
     else if (laberintoActual->getCelda(destY,destX) == 'A'){
