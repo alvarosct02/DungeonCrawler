@@ -16,7 +16,12 @@ private:
 public:
     Monstruo(void); 
     virtual ~Monstruo(void);
-    Monstruo(string,int,int,int,int,int,int);        
+    Monstruo(string,int,int,int,int);   
+    
+    void setDef(int );
+    void setAtk(int );  
+    void setMaxVida(int);
+    
 };
 
 Monstruo::~Monstruo(void){
@@ -24,15 +29,29 @@ Monstruo::~Monstruo(void){
 }
 
 Monstruo::Monstruo(void)
-    :Entidad("NoName",0,0,100,10,10){
+    :Entidad("NoName",0,0,1){
     nivel = 1;
 }
-Monstruo::Monstruo(string name ,int y,int x,int lvl,int id,int atk,int def)
-    :Entidad(name,y,x,100+(lvl-1)*20,atk,def){
-//    int imgID = rand()%7;
+Monstruo::Monstruo(string name ,int y,int x,int lvl,int id)
+    :Entidad(name,y,x,lvl){
+    
     
     Entidad::setIdImg(id);
     nivel = lvl;    
 }
+
+
+void Monstruo::setMaxVida(int lvl) {
+    Entidad::setMaxVida(100*10*lvl*lvl);
+}
+
+void Monstruo::setAtk(int lvl) {
+    setAtk(15+5*lvl);
+}
+
+void Monstruo::setDef(int lvl) {
+    setDef(10+5*lvl);
+}
+
 #endif	/* MONSTRUO_H */
 

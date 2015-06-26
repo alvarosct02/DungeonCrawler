@@ -2,6 +2,9 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" nextobjectid="1">
  <tileset firstgid="1" name="fire_tileset" tilewidth="16" tileheight="16">
   <image source="../../Pictures/tiles/fire_tileset.png" width="416" height="256"/>
+  <tile id="1">
+      <pinga tam="1"/>
+  <tile/>
  </tileset>
  <layer name="Capa de Patrones 1" width="20" height="20">
   <data>

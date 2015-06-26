@@ -31,13 +31,13 @@ protected:
     
 public:
     Entidad();
-    Entidad(string,int,int,int,int,int);
+    Entidad(string,int,int,int);
     void mover(int,int);
     void setNombre(string nombre);
     string getNombre() const;
     void setVidaActual(int vidaActual);
     int getVidaActual() const;
-    void setMaxVida(int maxVida);
+    virtual void setMaxVida(int maxVida);
     int getMaxVida() const;
     void setPosY(int posY);
     int getPosY() const;
@@ -51,9 +51,9 @@ public:
     void setIdImg(int idImg);
     int getIdImg() const;
     
-    void setAtk(int atk);
+    virtual void setAtk(int atk);
     int getAtk() const;
-    void setDef(int def);
+    virtual void setDef(int def);
     int getDef() const; 
         
     int takeDamage(int);
@@ -121,15 +121,10 @@ Entidad::Entidad(){
     
 }
 
-Entidad::Entidad(string name,int y,int x,int health,int atk,int def){
+Entidad::Entidad(string name,int y,int x,int lvl){
     setNombre(name);
     setPosX(x);
     setPosY(y);
-    setMaxVida(health);
-    setVidaActual(health);
-    
-    setAtk(atk);
-    setDef(def);    
     
     setAtkSP(0);
     setDefSP(0);

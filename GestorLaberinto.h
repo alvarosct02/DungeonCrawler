@@ -39,7 +39,7 @@ GestorLaberinto::GestorLaberinto() {
 //        cerr << "File could not be opened" << endl;
 //        exit(1);
 //    }
-    ifstream archivo("mapas.txt");
+    archivo.open("mapas.txt");
     if (!archivo){
         cerr << "Error al cargar mapas.txt " << endl;
         exit(1);
@@ -63,11 +63,33 @@ void GestorLaberinto::leerXML(char*cad, Celda*** &matrix, int &row, int&col){
             exit(1);
     }
     
-    cout << "Nombre: " << raiz.child("tileset").attribute("name").as_string() << endl;
+//    cout << "Nombre: " << raiz.child("tileset").attribute("name").as_string() << endl;
     row = raiz.attribute("height").as_int();
     col = raiz.attribute("width").as_int();
     
     cout << "Dimensiones: " << row << "x" << col << endl;
+    
+    int count = 0 ;
+    xml_node aux;
+    for (xml_node tile = raiz.child("layer").child("data").child("tile"); tile; tile = tile.next_sibling("tile"))
+    {
+        count ++;
+        int gid =  tile.attribute("gid").as_int();
+        gid -= 1;
+        char buff[5];
+        itoa(gid,buff,10);
+        
+//        cout << buff;
+        aux = raiz.child("tileset").find_child_by_attribute("tile","id",buff);
+        if (aux == NULL){
+            int a = 0;
+        }
+        string car = aux.child("properties").find_child_by_attribute("property","name","tipo").attribute("value").value();
+        cout << car;
+        if (count % col == 0)
+            cout << endl;
+    }
+    cout << count << endl;
     
     
 }

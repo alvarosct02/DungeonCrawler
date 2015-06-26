@@ -108,7 +108,7 @@ void Juego::agregarMyA(int nivel,Monstruo **&listaMonstruo,Artefacto **&listaArt
 //            si celda vacia, Agregar el monstruo
             if (lab->estaVacia(j,i) && randMonst < lab->getPctMonstruo()){  
                 int id  = rand() % gestAvatar->getCountMonstruo();                   
-                Monstruo* monst = new Monstruo("Guanira",j,i,nivel+1,id,10,10);
+                Monstruo* monst = new Monstruo("Guanira",j,i,nivel+1,id);
                 lab->setMonstruo(j,i,monst);
                 if (cM != 0 && cM%SIZE == 0)
                     agrandarListaMonstruo(listaMonstruo,cM);
@@ -226,7 +226,7 @@ void Juego::initJuego(void){
     
     
     int idAvatar = dibujador->escogerAvatar(); //ESTO LO DEBE HACER DIBJADOR
-    avatar = new Avatar("Alvaro",lastY,lastX,100,idAvatar,10,10);
+    avatar = new Avatar("Alvaro",lastY,lastX,100,idAvatar);
     
     dibujador->setSize(A,B);    
     dibujador->dibujarLaberinto(avatar,laberintoActual);

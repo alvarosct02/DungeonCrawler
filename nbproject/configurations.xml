@@ -71,21 +71,6 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="../../Google Drive/PUCP/2015-I/LP1/TrabajoGrupal/XML/pugiconfig.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../Google Drive/PUCP/2015-I/LP1/TrabajoGrupal/XML/pugixml.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="../../Google Drive/PUCP/2015-I/LP1/TrabajoGrupal/XML/pugixml.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="Arma.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Armadura.h" ex="false" tool="3" flavor2="0">
@@ -157,6 +142,12 @@
       <item path="paredes.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="personajes.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pugiconfig.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pugixml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="pugixml.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -179,21 +170,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="../../Google Drive/PUCP/2015-I/LP1/TrabajoGrupal/XML/pugiconfig.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../Google Drive/PUCP/2015-I/LP1/TrabajoGrupal/XML/pugixml.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="../../Google Drive/PUCP/2015-I/LP1/TrabajoGrupal/XML/pugixml.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="Arma.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Armadura.h" ex="false" tool="3" flavor2="0">
@@ -265,6 +241,12 @@
       <item path="paredes.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="personajes.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pugiconfig.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pugixml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="pugixml.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
