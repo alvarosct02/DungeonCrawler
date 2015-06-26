@@ -32,7 +32,7 @@ private:
 public:     
     virtual ~Laberinto(void); 
     
-    Laberinto(char**,int,int);
+    Laberinto(Celda***,int,int);
     int getCeldaRandom(int,int);
     char getCelda(int,int);
     int getCeldaID(int,int);
@@ -62,20 +62,21 @@ public:
     
 };
 
-Laberinto::Laberinto(char **matriz,int m, int n){  
+Laberinto::Laberinto(Celda ***matriz,int m, int n){  
 //    cout << "Laberinto Creado\n";
     M = m;
     N = n;
-    matrixCelda = new Celda**[M];
-    for (int j= 0; j<M; j++){
-        matrixCelda[j] = new Celda*[N];
-        for (int i= 0; i<N; i++){
-            char tipo = matriz[j][i];
-            matrixCelda[j][i] = new Celda(j,i,tipo);
-            if (tipo == '-') inicio = matrixCelda[j][i];
-            if (tipo == '+') final = matrixCelda[j][i];
-        }
-    }    
+//    matrixCelda = new Celda**[M];
+//    for (int j= 0; j<M; j++){
+//        matrixCelda[j] = new Celda*[N];
+//        for (int i= 0; i<N; i++){
+//            char tipo = matriz[j][i];
+//            matrixCelda[j][i] = new Celda(j,i,tipo);
+//            if (tipo == '-') inicio = matrixCelda[j][i];
+//            if (tipo == '+') final = matrixCelda[j][i];
+//        }
+//    }   
+    matrixCelda = matriz;
     
     srand (time(NULL));    
     pctMonstruo =   2 + rand()%4;
@@ -144,10 +145,16 @@ void Laberinto::setNivel(int nivel) {
     this->nivel = nivel+1;
     nivelesMonstruo = new int[5];
     nivelesArtefacto = new int[5];
-    for (int i=0, j= this->nivel - 2; i<5; i++,j++){
-        nivelesMonstruo[i] = max(1,j);
-        nivelesArtefacto[i] = max(1,j+1);
+    for (int i=0; i<3; i++){
+        nivelesMonstruo[i] = nivel;
+        nivelesArtefacto[i] = nivel;
     }
+    
+    nivelesMonstruo[3] = nivel + 1;
+    nivelesArtefacto[3] = nivel + 1;
+
+    nivelesMonstruo[4] = nivel + 2;
+    nivelesArtefacto[4] = nivel + 1;
 }
 
 int Laberinto::getNivel() const {
